@@ -1,0 +1,81 @@
+@use "../custom"as *;
+
+.navbar {
+    .navbar-brand {
+        font-family: "Space Mono", monospace;
+    }
+
+    .navbar-toggler {
+        border: none;
+    }
+}
+
+.navbar-queen-blue {
+    .navbar-brand {
+        color: $palette4-queen-blue;
+
+        &:hover,
+        &:focus {
+            color: $palette4-queen-blue-onhover;
+        }
+    }
+    .navbar-nav {
+        .nav-link {
+            color: $palette4-queen-blue;
+
+            &:hover,
+            &:focus {
+                color: $palette4-queen-blue-onhover;
+            }
+        }
+    }
+}
+
+.navbar-periwinkle-crayola {
+    .navbar-brand {
+        color: $palette4-periwinkle-crayola;
+
+        &:hover,
+        &:focus {
+            color: $palette4-periwinkle-crayola-onhover;
+        }
+    }
+
+    .navbar-nav {
+        .nav-link {
+            color: $palette4-periwinkle-crayola;
+
+            &:hover,
+            &:focus {
+                color: $palette4-periwinkle-crayola-onhover;
+            }
+        }
+    }
+}
+
+.navbar-light {
+    .navbar-brand {
+        color: $light;
+
+        &:hover,
+        &:focus {
+            color: darken($light, 15%);
+        }
+    }
+
+    .navbar-nav {
+        .nav-link {
+            color: $light;
+
+            &:hover,
+            &:focus {
+                color: darken($light, 15%);
+            }
+        }
+    }
+}
+
+.navbar .container ul li.active a {
+    border-bottom: 2px solid $palette4-periwinkle-crayola;
+    transition: 0.1s;
+}

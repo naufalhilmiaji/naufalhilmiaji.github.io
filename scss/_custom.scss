@@ -1,0 +1,255 @@
+// ====================================================
+// =                COLORING THEMES                   =
+// ====================================================
+
+// Color Palettes Light
+$blue-sky : #e1f5fe;
+$blue-light : #BBDEFB;
+$lightblue-light : #B3E5FC;
+$indigo-light : #C5CAE9;
+$purple-light : #E1BEE7;
+$deeppurple-light : #D1C4E9;
+$pink-light : #F8BBD0;
+$red-light : #FFCDD2;
+$brown-light : #D7CCC8;
+$deeporange-light : #FFCCBC;
+$orange-light : #FFE0B2;
+$amber-light : #FFECB3;
+$yellow-light : #FFF9C4;
+$green-light : #C8E6C9;
+$lightgreen-light : #DCEDC8;
+$lime-light : #F0F4C3;
+$teal-light : #B2DFDB;
+$cyan-light : #B2EBF2;
+$bluegray-light : #CFD8DC;
+$gray-light : #F5F5F5;
+
+// Color Palettes Default
+$blue :#2196F3;
+$lightblue :#03A9F4;
+$indigo :#3F51B5;
+$purple :#9C27B0;
+$deeppurple :#673AB7;
+$pink :#E91E63;
+$red :#F44336;
+$brown :#795548;
+$deeporange :#FF5722;
+$orange :#FF9800;
+$amber :#FFC107;
+$yellow :#FFEB3B;
+$lime :#CDDC39;
+$green :#4CAF50;
+$lightgreen :#8BC34A;
+$teal :#26A69A;
+$cyan :#00BCD4;
+$bluegray :#607D8B;
+$gray :#9E9E9E;
+
+// Color Palettes Dark
+$blue-dark : #0d47a1;
+$lightblue-dark : #01579b;
+$indigo-dark : #1A237E;
+$purple-dark : #4a148c;
+$deeppurple-dark : #311b92;
+$pink-dark : #880e4f;
+$red-dark : #b71c1c;
+$brown-dark : #3E2723;
+$deeporange-dark : #bf360c;
+$orange-dark : #e65100;
+$amber-dark : #ff6f00;
+$yellow-dark : #f57f17;
+$lime-dark : #827717;
+$green-dark : #1b5e20;
+$teal-dark : #004d40;
+$cyan-dark : #006064;
+$lightgreen-dark : #33691e;
+$bluegray-dark : #263238;
+$gray-dark : #212121;
+
+$white :#FFFFFF;
+$black :#000000;
+
+/*  =======================
+    Primary Colors
+    ======================= */
+
+$primary: #334257;
+$secondary: #476072;
+$success: #0C7B93;
+$info: $bluegray-light;
+$warning: #d08b32;
+$danger: #cb1a47;
+$light: #fcfcfc;
+$dark: #272b2e;
+$silver: #C0C0C0;
+
+/*  =======================
+    Palette 1
+    ======================= */
+
+$palette1-black: #22181C;
+$palette1-white: #f6e8ea;
+$palette1-pink: #ef626c;
+$palette1-gray: #312f2f;
+$palette1-teal: #84DCCF;
+
+/*  =======================
+    Palette 2 - Dark Colors
+    ======================= */
+
+$palette2-gunmetal: #002A32;
+$palette2-tuscany: #C4A29E;
+$palette2-pastel-pink: #EBA6A9;
+$palette2-apricot: #FFC6AC;
+$palette2-flickr-pink: #F40076;
+
+/*  =======================
+    Palette 3 - Pastel Colors
+    ======================= */
+
+$palette3-magnolia: #EAE4E9;
+$palette3-linen: #FFF1E6;
+$palette3-pale-pink: #FDE2E4;
+$palette3-mimi-pink: #FAD2E1;
+$palette3-mint-cream: #E2ECE9;
+$palette3-powder-blue: #BEE1E6;
+$palette3-isabelline: #F0EFEB;
+$palette3-lavender-web: #DFE7FD;
+// ---- darker
+$palette3-pink-lavender: #CDB4DB;
+$palette3-orchid-pink: #FFC8DD;
+$palette3-nadeshiko-pink: #FFAFCC;
+$palette3-uranian-blue: #BDE0FE;
+$palette3-baby-blue-eyes: #A2D2FF;
+
+/*  =======================
+    Palette 4 - Analogous Colors
+    ======================= */
+
+$palette4-light-steel-blue: #B6BFD4;
+$palette4-gray-x11: #B8BBBF;
+$palette4-cool-gray: #8A92AB;
+$palette4-dark-blue: #293546;
+
+// links
+$palette4-queen-blue: #356CAB;
+$palette4-queen-blue-onhover: rgb(33, 88, 151);
+$palette4-periwinkle-crayola: #CED9F5;
+$palette4-periwinkle-crayola-dark: #bac5e0;
+$palette4-periwinkle-crayola-onhover: rgb(186, 197, 225);
+
+
+// Color Map
+$theme-colors: ("blue-sky" : $blue-sky,
+    "blue-light" : $blue-light,
+    "blue" : $blue,
+    "blue-dark" : $blue-dark,
+
+    "lightblue-light" : $lightblue-light,
+    "lightblue" : $lightblue,
+    "lightblue-dark" : $lightblue-dark,
+
+    "indigo-light" : $indigo-light,
+    "indigo" : $indigo,
+    "indigo-dark" : $indigo-dark,
+
+    "purple-light" : $purple-light,
+    "purple" : $purple,
+    "purple-dark" : $purple-dark,
+
+    "pink-light" : $pink-light,
+    "pink" : $pink,
+    "pink-dark" : $pink-dark,
+
+    "red-light" : $red-light,
+    "red" : $red,
+    "red-dark" : $red-dark,
+
+    "orange-light" : $orange-light,
+    "orange" : $orange,
+    "orange-dark" : $orange-dark,
+
+    "yellow-light" : $yellow-light,
+    "yellow" : $yellow,
+    "yellow-dark" : $yellow-dark,
+
+    "green-light" : $green-light,
+    "green" : $green,
+    "green-dark" : $green-dark,
+
+    "teal-light" : $teal-light,
+    "teal" : $teal,
+    "teal-dark" : $teal-dark,
+
+    "cyan-light" : $cyan-light,
+    "cyan" : $cyan,
+    "cyan-dark" : $cyan-dark,
+
+    "white" : $white,
+    "gray-light": $gray-light,
+    "gray" : $gray,
+    "gray-dark" : $gray-dark,
+
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark, 
+    "silver": $silver,
+
+    "palette1-black": $palette1-black,
+    "palette1-white": $palette1-white,
+    "palette1-pink": $palette1-pink,
+    "palette1-gray": $palette1-gray,
+    "palette1-teal": $palette1-teal,
+
+    "palette2-gunmetal": $palette2-gunmetal,
+    "palette2-tuscany": $palette2-tuscany,
+    "palette2-pastel-pink": $palette2-pastel-pink,
+    "palette2-apricot": $palette2-apricot,
+    "palette2-flickr-pink": $palette2-flickr-pink,
+
+    "palette3-magnolia": $palette3-magnolia,
+    "palette3-line": $palette3-linen,
+    "palette3-pale-pink": $palette3-pale-pink,
+    "palette3-mimi-pink": $palette3-mimi-pink,
+    "palette3-mint-cream": $palette3-mint-cream,
+    "palette3-powder-blue": $palette3-powder-blue,
+    "palette3-isabelline": $palette3-isabelline,
+    "palette3-lavender-web": $palette3-lavender-web,
+    // darker
+    "palette3-pink-lavender": $palette3-pink-lavender,
+    "palette3-orchid-pink": $palette3-orchid-pink,
+    "palette3-nadeshiko-pink": $palette3-nadeshiko-pink,
+    "palette3-uranian-blue": $palette3-uranian-blue,
+    "palette3-baby-blue-eyes": $palette3-baby-blue-eyes,
+
+    "palette4-light-steel-blue": $palette4-light-steel-blue,
+    "palette4-queen-blue": $palette4-queen-blue,
+    "palette4-periwinkle-crayola": $palette4-periwinkle-crayola,
+    "palette4-periwinkle-crayola-dark": $palette4-periwinkle-crayola-dark,
+    "palette4-gray-x11": $palette4-gray-x11,
+    "palette4-cool-gray": $palette4-cool-gray,
+    "palette4-dark-blue": $palette4-dark-blue
+
+);
+
+
+// ====================================================
+// =                COMPONENTS                        =
+// ====================================================
+
+// Modals
+$modal-content-border-radius: 20px;
+$carousel-control-icon-width: 3rem;
+// $modal-content-bg : $primary;
+// $modal-content-color : $light;
+
+// Component Active BG
+// $component-active-bg        : $success;
+// $link-color                 : $light;
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";

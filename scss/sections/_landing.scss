@@ -1,0 +1,60 @@
+@use '../custom'as *;
+
+.page_header {
+    height: 100vh;
+
+    .socials {
+        position: absolute;
+        justify-content: center;
+        right: 5%;
+
+        ul {
+            list-style: none;
+            text-align: center;
+            padding: 0;
+
+            li {
+                padding: 1rem 1rem;
+                
+
+                a:hover {
+                    color: $palette4-queen-blue-onhover;
+                }
+            }
+        }
+    }
+
+    #photo {
+        background: url("/assets/img/AREmoji5-cropped.png");
+        background-repeat: no-repeat;
+        background-clip: content-box;
+        background-position: right center;
+        background-size: 550px 950px;
+
+        #header_text {
+
+            p {
+                font-weight: 500;
+            }
+
+            #name_text {
+                color: $palette4-queen-blue;
+            }
+
+            #webdev_span {
+                color: $palette4-queen-blue;
+            }
+
+        }
+        
+        #project-text {
+            border-radius: 30px 10px;
+        }
+
+        .counter {
+            font-family: "Space Mono", monospace;
+            border-right: 3px solid $palette4-periwinkle-crayola;
+        }
+    }
+
+}

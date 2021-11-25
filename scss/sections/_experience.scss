@@ -1,0 +1,13 @@
+@use '../custom' as *;
+
+.experience {
+    
+    #exp_date {
+        font-family: "Space Mono", monospace;
+    }
+
+    #exp_company, #exp_desc {
+        border-left: 1px solid $light;
+        text-align: justify;
+    }
+}
