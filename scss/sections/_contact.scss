@@ -4,4 +4,9 @@
     background-color: $palette4-cool-gray;
     color: $light;
     padding: 2rem 0;
+    border-radius: 20px;
+    box-shadow: -5px 5px 10px -5px darken($gray-light, 20%), 
+    5px -5px 10px -5px darken($gray-light, 20%), 
+    -5px -5px 10px -5px darken($gray-light, 20%), 
+    5px 10px 10px -5px darken($gray-light, 20%);
 }
