@@ -83,6 +83,8 @@ $light: #fcfcfc;
 $dark: #272b2e;
 $silver: #C0C0C0;
 
+$primary-20: darken($primary, 20%);
+
 /*  =======================
     Palette 1
     ======================= */
@@ -199,6 +201,8 @@ $theme-colors: ("blue-sky" : $blue-sky,
     "light": $light,
     "dark": $dark, 
     "silver": $silver,
+
+    "primary-20": $primary-20,
 
     "palette1-black": $palette1-black,
     "palette1-white": $palette1-white,

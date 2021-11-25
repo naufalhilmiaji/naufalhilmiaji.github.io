@@ -10,7 +10,9 @@
 @use "sections/about";
 @use "sections/experience";
 @use "sections/interest";
-@use "sections/portfolio";
+@use "sections/photography";
+@use "sections/contact";
+@use "sections/footer";
 
 // Media Controller
 @use "media_controller/responsiveness";
@@ -322,9 +324,7 @@ a {
                 margin-bottom: 5px;
             }
         }
-
     }
-
     h1 {
         font-size: 3rem;
         margin: 0;
