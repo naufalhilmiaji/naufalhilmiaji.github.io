@@ -18672,6 +18672,8 @@ textarea.form-control-lg {
   background-color: #8A92AB;
   color: #fcfcfc;
   padding: 2rem 0;
+  border-radius: 20px;
+  box-shadow: -5px 5px 10px -5px #c2c2c2, 5px -5px 10px -5px #c2c2c2, -5px -5px 10px -5px #c2c2c2, 5px 10px 10px -5px #c2c2c2;
 }
 
 footer #footer-socials ul {
@@ -18885,10 +18887,6 @@ a {
 
   .container-fluid {
     max-width: 768px;
-  }
-
-  .navbar #logo_span {
-    display: none;
   }
 
   .page_header {
