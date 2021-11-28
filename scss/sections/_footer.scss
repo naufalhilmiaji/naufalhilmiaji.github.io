@@ -1,13 +1,16 @@
 @use "../custom"as *;
 
 footer {
+    transition: 0.5s cubic-bezier(0.25, 0, 0.75, 1);
 
     #footer-socials ul {
+        transition: 0.2s ease;
         list-style: none;
         text-align: center;
         padding: 0;
 
         li {
+            transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
             display: inline;
             margin: 0 0.5rem;
         }

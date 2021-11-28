@@ -1,12 +1,16 @@
 @use "../custom" as *;
 
-#con-row {
-    background-color: $palette4-cool-gray;
-    color: $light;
-    padding: 2rem 0;
-    border-radius: 20px;
-    box-shadow: -5px 5px 10px -5px darken($gray-light, 20%), 
-    5px -5px 10px -5px darken($gray-light, 20%), 
-    -5px -5px 10px -5px darken($gray-light, 20%), 
-    5px 10px 10px -5px darken($gray-light, 20%);
+.contact {
+    transition: 0.5s cubic-bezier(0.25, 0, 0.75, 1);
+    #con-row {
+        transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
+        background-color: $palette4-cool-gray;
+        color: $light;
+        padding: 2rem 0;
+        border-radius: 20px;
+        box-shadow: -5px 5px 10px -5px darken($gray-light, 20%), 
+        5px -5px 10px -5px darken($gray-light, 20%), 
+        -5px -5px 10px -5px darken($gray-light, 20%), 
+        5px 10px 10px -5px darken($gray-light, 20%);
+    }
 }

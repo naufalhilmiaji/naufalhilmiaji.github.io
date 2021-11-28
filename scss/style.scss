@@ -102,14 +102,14 @@ a {
         
         .dark-mode-toggler {
             top: 11%;
-            right: 6%;
+            right: 2%;
             border-radius: 50%;
             padding: 0.3rem 0.55rem;
         }
 
         .light-mode-toggler {
             top: 11%;
-            right: 6%;
+            right: 2%;
             border-radius: 50%;
             padding: 0.3rem 0.55rem;
         }
@@ -124,7 +124,7 @@ a {
         #photo-row {
             img {
                 height: 450px;
-                width: 480px;
+                max-width: 100%;
             }
         }
     }
@@ -178,15 +178,15 @@ a {
     .page_header {
         
         .dark-mode-toggler {
-            top: 9%;
-            right: 5%;
+            top: 11%;
+            right: 2%;
             border-radius: 50%;
-            padding: 0.2rem 0.45rem;
+            padding: 0.2rem 0.4rem;
         }
 
         .light-mode-toggler {
-            top: 9%;
-            right: 5%;
+            top: 11%;
+            right: 2%;
             border-radius: 50%;
             padding: 0.3rem 0.55rem;
         }
@@ -247,7 +247,7 @@ a {
             img {
                 border-radius: 20px;
                 max-height: 275.15px;
-                width: 320px;
+                max-width: 100%;
                 margin-bottom: 5px;
             }
         }
@@ -317,6 +317,20 @@ a {
 
     .page_header {
         height: 100vh;
+        
+        .dark-mode-toggler {
+            top: 8%;
+            right: 3%;
+            border-radius: 50%;
+            padding: 0.2rem 0.4rem;
+        }
+
+        .light-mode-toggler {
+            top: 8%;
+            right: 3%;
+            border-radius: 50%;
+            padding: 0.3rem 0.55rem;
+        }
 
         .socials {
             display: none;
@@ -361,6 +375,26 @@ a {
     .experience #exp_company,
     .experience #exp_desc {
         border: none;
+    }
+    
+    .photography {
+        
+        #photo-row {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            align-self: center;
+
+            .img-container .img-overlay {
+                display: none;
+            }
+
+            img {
+                border-radius: 20px;
+                max-height: 275.15px;
+                max-width: 100%;
+                margin-bottom: 5px;
+            }
+        }
     }
 
     h1 {

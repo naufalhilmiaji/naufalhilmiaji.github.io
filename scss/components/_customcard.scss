@@ -9,13 +9,14 @@
     5px 10px 10px -15px darken($gray-light, 20%);
     background-color: $gray-light;
     max-width: 500px;
+    transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
 
     .icons {
         width: 100px;
         height: 100px;
         margin: auto;
         filter: opacity(0.8);
-        // transition: 0.3s ease-in-out;
+        transition: 0.2s cubic-bezier(0.25, 0, 0.75, 1);
     }
 
     h2 {

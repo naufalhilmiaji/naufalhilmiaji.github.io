@@ -3,26 +3,26 @@
 .page_header {
     height: 100vh;
     position: relative;
-    transition: 0.5s ease;
     background-color: $palette4-periwinkle-crayola;
     color: $palette4-dark-blue;
+    transition: 0.5s cubic-bezier(0.75, 0, 0.25, 1);
 
     .dark-mode-toggler {
         // display: none;
 
         position: fixed;
         justify-content: center;
-        top: 9%;
-        right: 1%;
+        top: 10%;
+        right: 10%;
         border-radius: 50%;
         padding: 0.3rem 0.55rem;
         background-color: $palette4-queen-blue;
         z-index: 9999;
-        transition: 0.3s ease;
+        transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
 
         a .bi-moon-fill {
+            transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
             color: darken($light, 5%);
-            transition: 0.3s ease;
 
             &:hover {
                 color: $light;
@@ -43,17 +43,17 @@
 
         position: fixed;
         justify-content: center;
-        top: 9%;
-        right: 1%;
+        top: 10%;
+        right: 10%;
         border-radius: 50%;
         padding: 0.3rem 0.55rem;
         background-color: $palette1-pink;
         z-index: 9999;
-        transition: 0.3s ease;
+        transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
 
         a .bi-sun-fill {
+            transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
             color: darken($yellow-light, 10%);
-            transition: 0.3s ease;
             
             &:hover {
                 color: $yellow;
@@ -74,6 +74,7 @@
         position: absolute;
         justify-content: center;
         right: 5%;
+        transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
 
         ul {
             list-style: none;
@@ -98,6 +99,7 @@
         position: absolute;
         justify-content: center;
         right: 5%;
+        transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
 
         ul {
             list-style: none;
@@ -124,9 +126,10 @@
         background-clip: content-box;
         background-position: right center;
         background-size: 500px 900px;
+        transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
 
         #header_text {
-
+            transition: 0.1s ease 0s;
             p {
                 font-weight: 500;
             }
@@ -157,8 +160,10 @@
         background-clip: content-box;
         background-position: right center;
         background-size: 500px 900px;
+        transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
 
         #header_text {
+            transition: 0.1s ease 0s;
 
             p {
                 font-weight: 500;

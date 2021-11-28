@@ -18776,12 +18776,14 @@ textarea.form-control-lg {
   box-shadow: -5px 5px 10px -15px #c2c2c2, 5px -5px 10px -15px #c2c2c2, -5px -5px 10px -15px #c2c2c2, 5px 10px 10px -15px #c2c2c2;
   background-color: #F5F5F5;
   max-width: 500px;
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
 }
 .card .icons {
   width: 100px;
   height: 100px;
   margin: auto;
   filter: opacity(0.8);
+  transition: 0.2s cubic-bezier(0.25, 0, 0.75, 1);
 }
 .card h2 {
   text-align: center;
@@ -18841,24 +18843,24 @@ textarea.form-control-lg {
 .page_header {
   height: 100vh;
   position: relative;
-  transition: 0.5s ease;
   background-color: #CED9F5;
   color: #293546;
+  transition: 0.5s cubic-bezier(0.75, 0, 0.25, 1);
 }
 .page_header .dark-mode-toggler {
   position: fixed;
   justify-content: center;
-  top: 9%;
-  right: 1%;
+  top: 10%;
+  right: 10%;
   border-radius: 50%;
   padding: 0.3rem 0.55rem;
   background-color: #356CAB;
   z-index: 9999;
-  transition: 0.3s ease;
+  transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
 }
 .page_header .dark-mode-toggler a .bi-moon-fill {
+  transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
   color: #efefef;
-  transition: 0.3s ease;
 }
 .page_header .dark-mode-toggler a .bi-moon-fill:hover {
   color: #fcfcfc;
@@ -18871,17 +18873,17 @@ textarea.form-control-lg {
   display: none;
   position: fixed;
   justify-content: center;
-  top: 9%;
-  right: 1%;
+  top: 10%;
+  right: 10%;
   border-radius: 50%;
   padding: 0.3rem 0.55rem;
   background-color: #ef626c;
   z-index: 9999;
-  transition: 0.3s ease;
+  transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
 }
 .page_header .light-mode-toggler a .bi-sun-fill {
+  transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
   color: #fff491;
-  transition: 0.3s ease;
 }
 .page_header .light-mode-toggler a .bi-sun-fill:hover {
   color: #FFEB3B;
@@ -18893,6 +18895,7 @@ textarea.form-control-lg {
   position: absolute;
   justify-content: center;
   right: 5%;
+  transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
 }
 .page_header .socials ul {
   list-style: none;
@@ -18912,6 +18915,7 @@ textarea.form-control-lg {
   position: absolute;
   justify-content: center;
   right: 5%;
+  transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
 }
 .page_header .socials-dark ul {
   list-style: none;
@@ -18933,6 +18937,10 @@ textarea.form-control-lg {
   background-clip: content-box;
   background-position: right center;
   background-size: 500px 900px;
+  transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
+}
+.page_header .photo-light #header_text {
+  transition: 0.1s ease 0s;
 }
 .page_header .photo-light #header_text p {
   font-weight: 500;
@@ -18956,6 +18964,10 @@ textarea.form-control-lg {
   background-clip: content-box;
   background-position: right center;
   background-size: 500px 900px;
+  transition: 0.3s cubic-bezier(0.25, 0, 0.75, 1);
+}
+.page_header .photo-dark #header_text {
+  transition: 0.1s ease 0s;
 }
 .page_header .photo-dark #header_text p {
   font-weight: 500;
@@ -18974,33 +18986,45 @@ textarea.form-control-lg {
   border-right: 3px solid #CED9F5;
 }
 
+.about {
+  transition: 0.5s cubic-bezier(0.75, 0, 0.25, 1);
+}
 .about #about_photo {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   background-color: #8A92AB;
   height: 480px;
   width: 380px;
   border-radius: 20px;
 }
 .about #row_about {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   border-radius: 20px;
   background-color: #F5F5F5;
   box-shadow: -5px 5px 16px -10px #c2c2c2, 5px -5px 16px -10px #c2c2c2, -5px -5px 16px -10px #c2c2c2, 5px 10px 16px -10px #c2c2c2;
 }
 .about h4, .about h6 {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   margin-bottom: 10px;
 }
 .about #cs_span {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   color: #356CAB;
 }
 .about #description {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   text-align: justify;
   margin-bottom: 1rem;
 }
 .about .tabrow {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   padding-bottom: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid #002A32;
 }
 
+.experience {
+  transition: 0.5s cubic-bezier(0.75, 0, 0.25, 1);
+}
 .experience #exp_date {
   font-family: "Space Mono", monospace;
 }
@@ -19009,7 +19033,18 @@ textarea.form-control-lg {
   text-align: justify;
 }
 
+.interest {
+  transition: 0.5s cubic-bezier(0.25, 0, 0.75, 1);
+}
+
+.photography {
+  transition: 0.5s cubic-bezier(0.25, 0, 0.75, 1);
+}
+.photography #photo-row {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
+}
 .photography #photo-row .img-container {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   position: relative;
   display: inline-block;
 }
@@ -19021,12 +19056,14 @@ textarea.form-control-lg {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
-  transition: opacity 500ms ease-in-out;
+  transition: opacity 500ms cubic-bezier(0.25, 0, 0.75, 1);
 }
 .photography #photo-row .img-container:hover .img-overlay {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   opacity: 1;
 }
 .photography #photo-row .img-overlay .img-overlay-content {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -19035,17 +19072,23 @@ textarea.form-control-lg {
   text-align: center;
 }
 .photography #photo-row img {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   height: 615.7px;
   max-width: 615.7px;
   object-fit: cover;
 }
 
 .modal .modal-content img {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   max-height: 100vh;
   max-width: 100%;
 }
 
-#con-row {
+.contact {
+  transition: 0.5s cubic-bezier(0.25, 0, 0.75, 1);
+}
+.contact #con-row {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   background-color: #8A92AB;
   color: #fcfcfc;
   padding: 2rem 0;
@@ -19053,12 +19096,17 @@ textarea.form-control-lg {
   box-shadow: -5px 5px 10px -5px #c2c2c2, 5px -5px 10px -5px #c2c2c2, -5px -5px 10px -5px #c2c2c2, 5px 10px 10px -5px #c2c2c2;
 }
 
+footer {
+  transition: 0.5s cubic-bezier(0.25, 0, 0.75, 1);
+}
 footer #footer-socials ul {
+  transition: 0.2s ease;
   list-style: none;
   text-align: center;
   padding: 0;
 }
 footer #footer-socials ul li {
+  transition: 0.1s cubic-bezier(0.25, 0, 0.75, 1);
   display: inline;
   margin: 0 0.5rem;
 }
@@ -19115,7 +19163,7 @@ a {
   margin: 0;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1500px) {
   .page_header .photo-light {
     background-size: 500px 800px;
   }
@@ -19124,9 +19172,27 @@ a {
     background-size: 500px 800px;
   }
 
+  .page_header .dark-mode-toggler {
+    top: 11%;
+    right: 2%;
+    border-radius: 50%;
+    padding: 0.3rem 0.55rem;
+  }
+  .page_header .light-mode-toggler {
+    top: 11%;
+    right: 2%;
+    border-radius: 50%;
+    padding: 0.3rem 0.55rem;
+  }
+
   .about #about_photo {
     height: 430px;
     width: 330px;
+  }
+
+  .photography #photo-row img {
+    height: 450px;
+    max-width: 100%;
   }
 
   h1 {
@@ -19173,6 +19239,19 @@ a {
   }
 }
 @media (max-width: 1200px) {
+  .page_header .dark-mode-toggler {
+    top: 11%;
+    right: 2%;
+    border-radius: 50%;
+    padding: 0.2rem 0.4rem;
+  }
+  .page_header .light-mode-toggler {
+    top: 11%;
+    right: 2%;
+    border-radius: 50%;
+    padding: 0.3rem 0.55rem;
+  }
+
   .about #about_photo {
     height: 380px;
     width: 280px;
@@ -19210,7 +19289,7 @@ a {
   .photography #photo-row img {
     border-radius: 20px;
     max-height: 275.15px;
-    width: 488.19px;
+    max-width: 100%;
     margin-bottom: 5px;
   }
 
@@ -19277,6 +19356,18 @@ a {
   .page_header {
     height: 100vh;
   }
+  .page_header .dark-mode-toggler {
+    top: 8%;
+    right: 3%;
+    border-radius: 50%;
+    padding: 0.2rem 0.4rem;
+  }
+  .page_header .light-mode-toggler {
+    top: 8%;
+    right: 3%;
+    border-radius: 50%;
+    padding: 0.3rem 0.55rem;
+  }
   .page_header .socials {
     display: none;
   }
@@ -19304,9 +19395,17 @@ a {
     border: none;
   }
 
+  .photography #photo-row {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    align-self: center;
+  }
+  .photography #photo-row .img-container .img-overlay {
+    display: none;
+  }
   .photography #photo-row img {
     border-radius: 20px;
-    max-height: 240px;
+    max-height: 275.15px;
     max-width: 100%;
     margin-bottom: 5px;
   }

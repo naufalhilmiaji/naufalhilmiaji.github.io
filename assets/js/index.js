@@ -17,7 +17,25 @@ function scrollFunction() {
         document.getElementById("logo_span").style.display = "none"
         document.getElementById("svg_nav").style.fill = "#FCFCFC"
         navbar.style.transition = "0.3s"
+
+        // darkSwitcher.style.cssText = `
+        //     top: 7%;
+        //     right: 2%;
+        // `
+        // lightSwitcher.style.cssText = `
+        //     top: 7%;
+        //     right: 2%;
+        // `
     } else {
+        // darkSwitcher.style.cssText = `
+        //     top: 10%;
+        //     right: 10%;
+        // `
+        // lightSwitcher.style.cssText = `
+        //     top: 10%;
+        //     right: 10%;
+        // `
+
         if (navbar.classList.contains("bg-palette1-black-darker")) {
             navbar.classList.remove("py-lg-0", "bg-primary", "navbar-queen-blue")
             navbar.classList.add("py-lg-3", "bg-transparent", "navbar-palette1-white")
@@ -179,6 +197,7 @@ var photoSection = document.getElementById("photo-nav")
 // Contact
 var contactSection = document.getElementById("con-nav")
 var contactRow = document.getElementById("con-row")
+var sendBtn = document.getElementById("send-btn")
 
 // Footer
 var footerSection = document.getElementById("footer")
@@ -397,6 +416,9 @@ function darkContact() {
         -5px -5px 10px -15px #1b1e20, 
         5px 10px 10px -15px #1b1e20;
     `
+
+    sendBtn.classList.remove("btn-primary")
+    sendBtn.classList.add("btn-pink")
 }
 
 function lightContact() {
@@ -410,6 +432,9 @@ function lightContact() {
         -5px -5px 10px -15px #c2c2c2, 
         5px 10px 10px -15px #c2c2c2;
     `
+
+    sendBtn.classList.add("btn-primary")
+    sendBtn.classList.remove("btn-pink")
 }
 
 function darkFooter() {
