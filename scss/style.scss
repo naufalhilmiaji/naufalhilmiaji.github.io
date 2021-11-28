@@ -90,17 +90,43 @@ a {
 
 
 
-@media (max-width: 1400px) {
+@media (max-width: 1500px) {
     .page_header .photo-light {
         background-size: 500px 800px;
     }
     .page_header .photo-dark {
         background-size: 500px 800px;
     }
+    
+    .page_header {
+        
+        .dark-mode-toggler {
+            top: 11%;
+            right: 6%;
+            border-radius: 50%;
+            padding: 0.3rem 0.55rem;
+        }
+
+        .light-mode-toggler {
+            top: 11%;
+            right: 6%;
+            border-radius: 50%;
+            padding: 0.3rem 0.55rem;
+        }
+    }
 
     .about #about_photo {
         height: 430px;
         width: 330px;
+    }
+
+    .photography {
+        #photo-row {
+            img {
+                height: 450px;
+                width: 480px;
+            }
+        }
     }
 
     h1 {
@@ -148,6 +174,23 @@ a {
 }
 
 @media (max-width: 1200px) {
+
+    .page_header {
+        
+        .dark-mode-toggler {
+            top: 9%;
+            right: 5%;
+            border-radius: 50%;
+            padding: 0.2rem 0.45rem;
+        }
+
+        .light-mode-toggler {
+            top: 9%;
+            right: 5%;
+            border-radius: 50%;
+            padding: 0.3rem 0.55rem;
+        }
+    }
 
     .about {
         #about_photo {
@@ -204,7 +247,7 @@ a {
             img {
                 border-radius: 20px;
                 max-height: 275.15px;
-                width: 488.19px;
+                width: 320px;
                 margin-bottom: 5px;
             }
         }
@@ -320,16 +363,6 @@ a {
         border: none;
     }
 
-    .photography {
-        #photo-row {
-            img {
-                border-radius: 20px;
-                max-height: 240px;
-                max-width: 100%;
-                margin-bottom: 5px;
-            }
-        }
-    }
     h1 {
         font-size: 3rem;
         margin: 0;
