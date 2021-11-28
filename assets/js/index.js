@@ -6,6 +6,8 @@ window.onscroll = function () {
     // interestSticky()
 };
 
+var fullHdRes = window.matchMedia("(max-width: 1920px)")
+
 function scrollFunction() {
     if (
         document.body.scrollTop > 60 ||
@@ -18,24 +20,28 @@ function scrollFunction() {
         document.getElementById("svg_nav").style.fill = "#FCFCFC"
         navbar.style.transition = "0.3s"
 
-        // darkSwitcher.style.cssText = `
-        //     top: 7%;
-        //     right: 2%;
-        // `
-        // lightSwitcher.style.cssText = `
-        //     top: 7%;
-        //     right: 2%;
-        // `
-    } else {
-        // darkSwitcher.style.cssText = `
-        //     top: 10%;
-        //     right: 10%;
-        // `
-        // lightSwitcher.style.cssText = `
-        //     top: 10%;
-        //     right: 10%;
-        // `
+        if (fullHdRes.matches) {
 
+            darkSwitcher.style.cssText = `
+                top: 7%;
+                right: 2%;
+            `
+            lightSwitcher.style.cssText = `
+                top: 7%;
+                right: 2%;
+            `
+        }
+    } else {
+        if (fullHdRes.matches) {
+            darkSwitcher.style.cssText = `
+            top: 10%;
+            right: 10%;
+        `
+            lightSwitcher.style.cssText = `
+            top: 10%;
+            right: 10%;
+        `
+        }
         if (navbar.classList.contains("bg-palette1-black-darker")) {
             navbar.classList.remove("py-lg-0", "bg-primary", "navbar-queen-blue")
             navbar.classList.add("py-lg-3", "bg-transparent", "navbar-palette1-white")
