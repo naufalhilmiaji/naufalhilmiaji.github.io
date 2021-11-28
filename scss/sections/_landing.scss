@@ -2,6 +2,73 @@
 
 .page_header {
     height: 100vh;
+    position: relative;
+    transition: 0.5s ease;
+    background-color: $palette4-periwinkle-crayola;
+    color: $palette4-dark-blue;
+
+    .dark-mode-toggler {
+        // display: none;
+
+        position: fixed;
+        justify-content: center;
+        top: 9%;
+        right: 1%;
+        border-radius: 50%;
+        padding: 0.3rem 0.55rem;
+        background-color: $palette4-queen-blue;
+        z-index: 9999;
+        transition: 0.3s ease;
+
+        a .bi-moon-fill {
+            color: darken($light, 5%);
+            transition: 0.3s ease;
+
+            &:hover {
+                color: $light;
+            }
+        }
+
+        &:hover {
+            background-color: darken($palette4-queen-blue, 20%);
+            box-shadow: -5px 5px 10px 0px $gray-light, 
+            5px -5px 10px 0px $gray-light, 
+            -5px -5px 10px 0px $gray-light, 
+            5px 10px 10px 0px $gray-light;
+        }
+    }
+    
+    .light-mode-toggler {
+        display: none;
+
+        position: fixed;
+        justify-content: center;
+        top: 9%;
+        right: 1%;
+        border-radius: 50%;
+        padding: 0.3rem 0.55rem;
+        background-color: $palette1-pink;
+        z-index: 9999;
+        transition: 0.3s ease;
+
+        a .bi-sun-fill {
+            color: darken($yellow-light, 10%);
+            transition: 0.3s ease;
+            
+            &:hover {
+                color: $yellow;
+            }
+        }
+        
+        &:hover {
+            // background-color: $palette1-pink;
+            box-shadow: -5px 5px 10px 0px $yellow-light, 
+            5px -5px 10px 0px $yellow-light, 
+            -5px -5px 10px 0px $yellow-light, 
+            5px 10px 10px 0px $yellow-light;
+        }
+
+    }
 
     .socials {
         position: absolute;
@@ -15,21 +82,48 @@
 
             li {
                 padding: 1rem 1rem;
-                
 
-                a:hover {
-                    color: $palette4-queen-blue-onhover;
+                a {
+                    color: $palette4-queen-blue;
+
+                    &:hover {
+                        color: darken($palette4-queen-blue, 20%);
+                    }
                 }
             }
         }
     }
 
-    #photo {
-        background: url("/assets/img/AREmoji5-cropped.png");
+    .socials-dark {
+        position: absolute;
+        justify-content: center;
+        right: 5%;
+
+        ul {
+            list-style: none;
+            text-align: center;
+            padding: 0;
+
+            li {
+                padding: 1rem 1rem;
+
+                a {
+                    color: $palette1-pink;
+
+                    &:hover {
+                        color: darken($palette1-white, 5%);
+                    }
+                }
+            }
+        }
+    }
+
+    .photo-light {
+        background: url("/assets/img/emoji-blue.png");
         background-repeat: no-repeat;
         background-clip: content-box;
         background-position: right center;
-        background-size: 550px 950px;
+        background-size: 500px 900px;
 
         #header_text {
 
@@ -46,7 +140,7 @@
             }
 
         }
-        
+
         #project-text {
             border-radius: 30px 10px;
         }
@@ -55,6 +149,39 @@
             font-family: "Space Mono", monospace;
             border-right: 3px solid $palette4-periwinkle-crayola;
         }
+    }
+
+    .photo-dark {
+        background: url("/assets/img/emoji-pink.png");
+        background-repeat: no-repeat;
+        background-clip: content-box;
+        background-position: right center;
+        background-size: 500px 900px;
+
+        #header_text {
+
+            p {
+                font-weight: 500;
+            }
+
+            #name_text {
+                color: $palette1-pink;
+            }
+
+            #webdev_span {
+                color: $palette1-pink;
+            }
+
+        }
+    }
+
+    #project-text {
+        border-radius: 30px 10px;
+    }
+
+    .counter {
+        font-family: "Space Mono", monospace;
+        border-right: 3px solid $palette4-periwinkle-crayola;
     }
 
 }

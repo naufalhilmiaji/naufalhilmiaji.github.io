@@ -90,8 +90,10 @@ $primary-20: darken($primary, 20%);
     ======================= */
 
 $palette1-black: #22181C;
+$palette1-black-darker: darken($palette1-black, 2%);
 $palette1-white: #f6e8ea;
 $palette1-pink: #ef626c;
+$palette1-pink-darker: darken($palette1-pink, 5%);
 $palette1-gray: #312f2f;
 $palette1-teal: #84DCCF;
 
@@ -205,8 +207,10 @@ $theme-colors: ("blue-sky" : $blue-sky,
     "primary-20": $primary-20,
 
     "palette1-black": $palette1-black,
+    "palette1-black-darker": $palette1-black-darker,
     "palette1-white": $palette1-white,
     "palette1-pink": $palette1-pink,
+    "palette1-pink-darker": $palette1-pink-darker,
     "palette1-gray": $palette1-gray,
     "palette1-teal": $palette1-teal,
 

@@ -91,7 +91,10 @@ a {
 
 
 @media (max-width: 1400px) {
-    .page_header #photo {
+    .page_header .photo-light {
+        background-size: 500px 800px;
+    }
+    .page_header .photo-dark {
         background-size: 500px 800px;
     }
 
@@ -264,6 +267,10 @@ a {
     .container-fluid {
         max-width: 768px;
     }
+    
+    .navbar #logo_span {
+        display: none;
+    }
 
     .page_header {
         height: 100vh;
@@ -284,10 +291,12 @@ a {
             // }
         }
 
-        #photo {
+        .photo-light {
             background: none;
-            // background-position: bottom center;
-            // background-size: 350px 350px;
+        }
+
+        .photo-dark {
+            background: none;
         }
 
         #header_text {

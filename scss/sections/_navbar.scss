@@ -55,21 +55,21 @@
 
 .navbar-light {
     .navbar-brand {
-        color: $light;
+        color: $palette1-white;
 
         &:hover,
         &:focus {
-            color: darken($light, 15%);
+            color: darken($palette1-white, 15%);
         }
     }
 
     .navbar-nav {
         .nav-link {
-            color: $light;
+            color: $palette1-white;
 
             &:hover,
             &:focus {
-                color: darken($light, 15%);
+                color: darken($palette1-white, 15%);
             }
         }
     }
