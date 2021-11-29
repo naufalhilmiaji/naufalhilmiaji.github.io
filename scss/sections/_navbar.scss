@@ -1,12 +1,22 @@
 @use "../custom"as *;
 
 .navbar {
+    transition: 0.3s ease;
+    
     .navbar-brand {
         font-family: "Space Mono", monospace;
     }
 
     .navbar-toggler {
-        border: none;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+
+        &:focus {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
     }
 }
 
@@ -76,6 +86,6 @@
 }
 
 .navbar .container ul li.active a {
-    border-bottom: 2px solid $palette4-periwinkle-crayola;
+    border-bottom: 2px solid darken($light, 10%);
     transition: 0.1s;
 }

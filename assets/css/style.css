@@ -18789,11 +18789,21 @@ textarea.form-control-lg {
   text-align: center;
 }
 
+.navbar {
+  transition: 0.3s ease;
+}
 .navbar .navbar-brand {
   font-family: "Space Mono", monospace;
 }
 .navbar .navbar-toggler {
-  border: none;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.navbar .navbar-toggler:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .navbar-queen-blue .navbar-brand {
@@ -18836,7 +18846,7 @@ textarea.form-control-lg {
 }
 
 .navbar .container ul li.active a {
-  border-bottom: 2px solid #CED9F5;
+  border-bottom: 2px solid #e3e3e3;
   transition: 0.1s;
 }
 
@@ -19347,10 +19357,6 @@ a {
 
   .container-fluid {
     max-width: 768px;
-  }
-
-  .navbar #logo_span {
-    display: none;
   }
 
   .page_header {

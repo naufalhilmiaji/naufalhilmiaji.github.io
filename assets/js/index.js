@@ -6,54 +6,79 @@ window.onscroll = function () {
     // interestSticky()
 };
 
-var fullHdRes = window.matchMedia("(max-width: 1920px)")
+var maxResolution = window.matchMedia("(max-width: 1920px)")
+var minResolution = window.matchMedia("(min-width: 1500px)")
+
+function resetNavbar() {
+    navbar.classList.remove(
+        "py-lg-3", "py-lg-0", "light-mode", "dark-mode",
+        "bg-transparent", "bg-palette1-black-darker", "bg-primary",
+        "navbar-light", "navbar-queen-blue", "navbar-periwinkle-crayola"
+    )
+
+    darkSwitcher.style.cssText = `
+        top: 10%;
+        right: 10%;
+    `
+    lightSwitcher.style.cssText = `
+        top: 10%;
+        right: 10%;
+    `
+}
+
+function moveDarkToggler() {
+    if (maxResolution.matches && minResolution.matches) {
+        darkSwitcher.style.cssText = `
+            top: 7%;
+            right: 2%;
+        `
+    }
+}
+
+function moveLightToggler() {
+    if (maxResolution.matches && minResolution.matches) {
+        lightSwitcher.style.cssText = `
+            top: 7%;
+            right: 2%;
+        `
+    }
+}
+
+function darkNavbar() {
+    resetNavbar()
+    document.getElementById("svg_nav").style.fill = "#f6e8ea"
+    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+        navbar.classList.add("dark-mode")
+        navbar.classList.add("py-lg-0", "bg-palette1-black-darker", "navbar-light")
+        // moveLightToggler()
+    } else {
+        navbar.classList.add("dark-mode")
+        navbar.classList.add("py-lg-3", "bg-transparent", "navbar-light")
+    }
+}
+
+function lightNavbar() {
+    resetNavbar()
+    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+        navbar.classList.add("light-mode")
+        navbar.classList.add("py-lg-0", "bg-primary", "navbar-periwinkle-crayola")
+        document.getElementById("logo_span").style.display = "none"
+        document.getElementById("svg_nav").style.fill = "#CED9F5"
+        // moveDarkToggler()
+    } else {
+        navbar.classList.add("light-mode")
+        navbar.classList.add("py-lg-3", "bg-transparent", "navbar-queen-blue")
+        document.getElementById("logo_span").style.display = "inline-block"
+        document.getElementById("svg_nav").style.fill = "#356CAB"
+    }
+}
 
 function scrollFunction() {
-    if (
-        document.body.scrollTop > 60 ||
-        document.documentElement.scrollTop > 60
-    ) {
-        navbar.classList.remove("py-lg-3", "bg-transparent", "navbar-queen-blue")
-        navbar.classList.add("py-lg-0", "bg-primary", "navbar-light")
 
-        document.getElementById("logo_span").style.display = "none"
-        document.getElementById("svg_nav").style.fill = "#FCFCFC"
-        navbar.style.transition = "0.3s"
-
-        // if (fullHdRes.matches) {
-
-        //     darkSwitcher.style.cssText = `
-        //         top: 7%;
-        //         right: 2%;
-        //     `
-        //     lightSwitcher.style.cssText = `
-        //         top: 7%;
-        //         right: 2%;
-        //     `
-        // }
+    if (navbar.classList.contains("light-mode")) {
+        lightNavbar()
     } else {
-        // if (fullHdRes.matches) {
-        //     darkSwitcher.style.cssText = `
-        //     top: 10%;
-        //     right: 10%;
-        // `
-        //     lightSwitcher.style.cssText = `
-        //     top: 10%;
-        //     right: 10%;
-        // `
-        // }
-        if (navbar.classList.contains("bg-palette1-black-darker")) {
-            navbar.classList.remove("py-lg-0", "bg-primary", "navbar-queen-blue")
-            navbar.classList.add("py-lg-3", "bg-transparent", "navbar-palette1-white")
-            document.getElementById("svg_nav").style.fill = "#FCFCFC"
-        } else {
-            navbar.classList.remove("py-lg-0", "bg-primary", "navbar-light")
-            navbar.classList.add("py-lg-3", "bg-transparent", "navbar-queen-blue")
-            document.getElementById("svg_nav").style.fill = "#356CAB"
-        }
-
-        document.getElementById("logo_span").style.display = "inline-block"
-        navbar.style.transition = "0.3s"
+        darkNavbar()
     }
 
     var current = "";
@@ -115,52 +140,6 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
-var interest = document.getElementById("int-nav")
-var contact = document.getElementById("con-nav")
-
-var intHeader = document.getElementById("int-header")
-var navbar = document.getElementById("main-navbar")
-
-var stop = (interest.offsetTop - 150)
-
-function addStickyClass(elem) {
-    elem.classList.add("sticky-xl-top", "pt-5")
-    elem.classList.remove("py-lg-5", "py-5")
-}
-
-function removeStickyClass(elem) {
-    elem.classList.remove("sticky-xl-top", "pt-5")
-    elem.classList.add("py-lg-5", "py-5")
-}
-
-function interestSticky() {
-    var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-
-    // console.log(elemCards)
-
-    for (i = 0; i < elemCards.length; i++) {
-        if (scrollTop >= stop) {
-            addStickyClass(interest)
-            intHeader.style.display = "none"
-
-            elemCards[i].style.padding = 0
-            elemCards[i].childNodes[1].style.display = "none"
-        } else {
-            removeStickyClass(interest)
-            intHeader.style.display = "block"
-
-            elemCards[i].style.padding = "2rem 0"
-            elemCards[i].childNodes[1].style.display = "block"
-        }
-    }
-}
-
-function showModal(img_id) {
-    var imgPath = document.getElementById(img_id).querySelectorAll("img")
-
-    document.getElementById("selectedImage").src = imgPath[0].src
-}
-
 // ==================
 //   Theme Switcher
 // ==================
@@ -210,6 +189,7 @@ var footerSection = document.getElementById("footer")
 var footerSocials = document.getElementsByClassName("bi")
 
 function darkToggler() {
+    darkNavbar()
     darkHeader()
     darkAbout()
     darkExperience()
@@ -220,6 +200,7 @@ function darkToggler() {
 }
 
 function lightToggler() {
+    lightNavbar()
     lightHeader()
     lightAbout()
     lightExperience()
@@ -230,16 +211,6 @@ function lightToggler() {
 }
 
 function darkHeader() {
-
-    navbar.classList.remove(
-        "bg-primary",
-        "navbar-queen-blue"
-    )
-
-    navbar.classList.add(
-        "bg-palette1-black-darker",
-        "navbar-light"
-    )
 
     pageHeader.classList.remove(
         "bg-palette4-periwinkle-crayola",
@@ -261,16 +232,6 @@ function darkHeader() {
 }
 
 function lightHeader() {
-
-    navbar.classList.add(
-        "bg-primary",
-        "navbar-queen-blue"
-    )
-
-    navbar.classList.remove(
-        "bg-palette1-black-darker",
-        "navbar-light"
-    )
 
     pageHeader.classList.remove(
         "bg-palette4-dark-blue",
