@@ -18880,7 +18880,6 @@ textarea.form-control-lg {
   box-shadow: -5px 5px 10px 0px #F5F5F5, 5px -5px 10px 0px #F5F5F5, -5px -5px 10px 0px #F5F5F5, 5px 10px 10px 0px #F5F5F5;
 }
 .page_header .light-mode-toggler {
-  display: none;
   position: fixed;
   justify-content: center;
   top: 10%;

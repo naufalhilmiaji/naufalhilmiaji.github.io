@@ -7,7 +7,7 @@ window.onscroll = function () {
 };
 
 var maxResolution = window.matchMedia("(max-width: 1920px)")
-var minResolution = window.matchMedia("(min-width: 1500px)")
+var minResolution = window.matchMedia("(min-width: 1800px)")
 
 function resetNavbar() {
     navbar.classList.remove(
@@ -16,17 +16,18 @@ function resetNavbar() {
         "navbar-light", "navbar-queen-blue", "navbar-periwinkle-crayola"
     )
 
-    darkSwitcher.style.cssText = `
-        top: 10%;
-        right: 10%;
-    `
-    lightSwitcher.style.cssText = `
-        top: 10%;
-        right: 10%;
-    `
+    // darkSwitcher.style.cssText = `
+    //     top: 10%;
+    //     right: 10%;
+    // `
+    // lightSwitcher.style.cssText = `
+    //     top: 10%;
+    //     right: 10%;
+    // `
 }
 
 function moveDarkToggler() {
+    darkSwitcher.classList.add("moved")
     if (maxResolution.matches && minResolution.matches) {
         darkSwitcher.style.cssText = `
             top: 7%;
@@ -36,6 +37,7 @@ function moveDarkToggler() {
 }
 
 function moveLightToggler() {
+    lightSwitcher.classList.add("moved")
     if (maxResolution.matches && minResolution.matches) {
         lightSwitcher.style.cssText = `
             top: 7%;
@@ -50,10 +52,17 @@ function darkNavbar() {
     if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
         navbar.classList.add("dark-mode")
         navbar.classList.add("py-lg-0", "bg-palette1-black-darker", "navbar-light")
-        // moveLightToggler()
+        moveLightToggler()
     } else {
         navbar.classList.add("dark-mode")
         navbar.classList.add("py-lg-3", "bg-transparent", "navbar-light")
+        if (lightSwitcher.classList.contains("moved")) {
+            lightSwitcher.classList.remove("moved")
+            lightSwitcher.style.cssText = `
+                top: 10%;
+                right: 10%;
+            `
+        }
     }
 }
 
@@ -64,12 +73,19 @@ function lightNavbar() {
         navbar.classList.add("py-lg-0", "bg-primary", "navbar-periwinkle-crayola")
         document.getElementById("logo_span").style.display = "none"
         document.getElementById("svg_nav").style.fill = "#CED9F5"
-        // moveDarkToggler()
+        moveDarkToggler()
     } else {
         navbar.classList.add("light-mode")
         navbar.classList.add("py-lg-3", "bg-transparent", "navbar-queen-blue")
         document.getElementById("logo_span").style.display = "inline-block"
         document.getElementById("svg_nav").style.fill = "#356CAB"
+        if (darkSwitcher.classList.contains("moved")) {
+            darkSwitcher.classList.remove("moved")
+            darkSwitcher.style.cssText = `
+                top: 10%;
+                right: 10%;
+            `
+        }
     }
 }
 
@@ -140,6 +156,11 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
+function showModal(img_id) {
+    var imgPath = document.getElementById(img_id).querySelectorAll("img")
+
+    document.getElementById("selectedImage").src = imgPath[0].src
+}
 // ==================
 //   Theme Switcher
 // ==================
