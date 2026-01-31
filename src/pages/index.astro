@@ -1,11 +1,67 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectHeader from "../components/ProjectHeader.astro";
+import CodeSection from "../components/CodeSection.astro";
+import { PROJECTS } from "../data/projects";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const featuredProjects = PROJECTS.filter(p => p.featured);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title="Backend & Automation Engineer">
+
+  <ProjectHeader
+    title="Backend & Automation Engineer"
+    subtitle="Designing backend systems, automation platforms, and long-running services"
+    line="01"
+    noCode
+  />
+
+  <CodeSection index={2} title="# professional_summary">
+    <p>
+      I build backend systems and automation tools with a focus on reliability,
+      observability, and long-running behavior under real-world constraints.
+    </p>
+
+    <p>
+      My work spans Django-based backends, containerized services, and
+      multi-channel messaging automation across Linux and Windows environments.
+    </p>
+  </CodeSection>
+
+  <CodeSection index={3} title="# highlighted_projects">
+    {featuredProjects.map((project) => (
+      <div class="project">
+        <div class="project-title">
+          <a href={`/projects/${project.slug}`}>
+            {project.title}
+          </a>
+        </div>
+
+        <div class="project-meta">
+          {project.tech.join(" · ")}
+        </div>
+
+        <p>
+          {project.subtitle}
+        </p>
+      </div>
+    ))}
+  </CodeSection>
+
+  <CodeSection index={4} title="# current_focus">
+    <ul>
+      <li>Multi-channel messaging automation</li>
+      <li>Backend reliability & failure handling</li>
+      <li>Infrastructure monitoring & diagnostics</li>
+      <li>Automation-first system design</li>
+    </ul>
+  </CodeSection>
+
+  <CodeSection index={5} title="# availability">
+    <p>
+      I'm interested in backend, automation, and systems-oriented roles where
+      reliability, clarity, and long-term maintainability matter.
+    </p>
+  </CodeSection>
+
+</BaseLayout>

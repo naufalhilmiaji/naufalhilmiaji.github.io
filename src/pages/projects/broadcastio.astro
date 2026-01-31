@@ -1,0 +1,107 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import CodeSection from "../../components/CodeSection.astro";
+
+const sections = [
+  { title: "# context" },
+  { title: "# goals" },
+  { title: "# architecture" },
+  { title: "# channel_handling" },
+  { title: "# failure_modes", foldable: true },
+  { title: "# recovery_strategy", foldable: true },
+  { title: "# implementation_notes", foldable: true },
+  { title: "# project_status" },
+];
+---
+
+<ProjectLayout
+  title="broadcastio"
+  subtitle="Multi-channel messaging orchestration for backend-driven automation"
+  tech="python · django · whatsapp-web · telegram · email · docker"
+>
+  {sections.map((section, i) => (
+    <CodeSection
+      index={i + 1}
+      title={section.title}
+      foldable={section.foldable}
+      summary="expand"
+    >
+      {section.title === "# context" && (
+        <>
+          <p>
+            Backend systems often require reliable outbound messaging across
+            multiple platforms with very different operational behaviors.
+          </p>
+
+          <p>
+            <strong>broadcastio</strong> acts as a unified orchestration layer
+            that coordinates message delivery across channels.
+          </p>
+        </>
+      )}
+
+      {section.title === "# goals" && (
+        <ul>
+          <li>Single backend interface for messaging</li>
+          <li>Support WhatsApp, Telegram, and email</li>
+          <li>Handle unreliable channels defensively</li>
+        </ul>
+      )}
+
+      {section.title === "# architecture" && (
+        <pre>
+Backend Service (Django)
+        │
+        ▼
+broadcastio Core
+ ├─ WhatsApp Worker
+ ├─ Telegram Worker
+ └─ Email Dispatcher
+        </pre>
+      )}
+
+      {section.title === "# channel_handling" && (
+        <ul>
+          <li>WhatsApp: session-based automation</li>
+          <li>Telegram: bot API acknowledgements</li>
+          <li>Email: SMTP-based delivery</li>
+        </ul>
+      )}
+
+      {section.title === "# failure_modes" && (
+        <ul>
+          <li>// WhatsApp session invalidation</li>
+          <li>// Headless browser instability</li>
+          <li>// Partial delivery across channels</li>
+        </ul>
+      )}
+
+      {section.title === "# recovery_strategy" && (
+        <ul>
+          <li>Channel isolation and restarts</li>
+          <li>Defensive retries</li>
+          <li>Delivery state tracking</li>
+        </ul>
+      )}
+
+      {section.title === "# implementation_notes" && (
+        <p>
+          broadcastio is designed to be embedded into existing backend systems
+          rather than operating as a standalone service.
+        </p>
+      )}
+
+      {section.title === "# project_status" && (
+        <p>
+          Source code:
+          <a
+            href="https://github.com/naufalhilmiaji/broadcastio"
+            target="_blank"
+          >
+            github.com/naufalhilmiaji/broadcastio
+          </a>
+        </p>
+      )}
+    </CodeSection>
+  ))}
+</ProjectLayout>

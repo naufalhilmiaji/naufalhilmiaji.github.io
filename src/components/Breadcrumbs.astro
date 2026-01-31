@@ -1,0 +1,35 @@
+---
+const pathname = Astro.url.pathname;
+const segments = pathname.split("/").filter(Boolean);
+
+// Optional label map from page frontmatter
+const pageLabels = Astro.props.labels || {};
+
+const crumbs = [
+  { label: "home", href: "/" },
+  ...segments.map((segment, index) => {
+    const href = "/" + segments.slice(0, index + 1).join("/");
+    const label =
+      pageLabels[segment] ??
+      segment.replace(/-/g, "_");
+
+    return { label, href };
+  }),
+];
+---
+
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <span class="breadcrumb-prefix">//</span>
+
+  {crumbs.map((crumb, index) => (
+    <span class="breadcrumb-item">
+      {index > 0 && <span class="breadcrumb-separator">/</span>}
+      {index < crumbs.length - 1 ? (
+        <a href={crumb.href}>{crumb.label}</a>
+      ) : (
+        <span class="breadcrumb-current">{crumb.label}</span>
+      )}
+    </span>
+  ))}
+</nav>

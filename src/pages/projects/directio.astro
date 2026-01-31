@@ -1,0 +1,142 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import CodeSection from "../../components/CodeSection.astro";
+
+const sections = [
+  { title: "# context" },
+  { title: "# goals" },
+  { title: "# architecture" },
+  { title: "# provider_choice" },
+  { title: "# llm_setup" },
+  { title: "# authentication_and_limits" },
+  { title: "# limitations", foldable: true },
+  { title: "# project_status" },
+];
+---
+
+<ProjectLayout
+  title="directio"
+  subtitle="Natural-language to maps API using local LLMs and open map data"
+  tech="fastapi · ollama · openstreetmap · osrm · docker"
+>
+  {sections.map((section, i) => (
+    <CodeSection
+      index={i + 1}
+      title={section.title}
+      foldable={section.foldable}
+      summary="expand"
+    >
+      {section.title === "# context" && (
+        <>
+          <p>
+            Many map-based applications require complex logic for search,
+            geocoding, routing, and intent handling. This logic is often
+            duplicated across applications and tightly coupled to commercial
+            APIs with billing requirements.
+          </p>
+
+          <p>
+            <strong>directio</strong> explores an alternative approach:
+            combining natural-language intent extraction with deterministic
+            backend execution using open map services.
+          </p>
+        </>
+      )}
+
+      {section.title === "# goals" && (
+        <ul>
+          <li>Accept natural-language map queries via a clean API</li>
+          <li>Extract intent without delegating logic to the LLM</li>
+          <li>Execute place search and routing deterministically</li>
+          <li>Avoid paid or gated external services</li>
+          <li>Return map-ready JSON for frontend rendering</li>
+        </ul>
+      )}
+
+      {section.title === "# architecture" && (
+        <>
+          <pre>
+Client (Web / Mobile)
+        │
+        ▼
+directio API (FastAPI)
+ ├─ Local LLM (Ollama)
+ │    └─ intent extraction only
+ ├─ Provider Layer
+ │    ├─ Geocoding (Photon)
+ │    └─ Routing (OSRM)
+ └─ Response Formatter (JSON)
+          </pre>
+
+          <p>
+            The LLM is used exclusively for intent extraction. All external
+            API calls are executed by deterministic backend providers.
+          </p>
+        </>
+      )}
+
+      {section.title === "# provider_choice" && (
+        <>
+          <p>
+            OpenStreetMap-based services were chosen to keep the project fully
+            runnable and reviewable without payment gates.
+          </p>
+
+          <ul>
+            <li>No billing verification required</li>
+            <li>Provider layer remains swappable</li>
+          </ul>
+        </>
+      )}
+
+      {section.title === "# llm_setup" && (
+        <>
+          <p>
+            directio uses a local LLM served via Ollama, running in Docker.
+          </p>
+
+          <ul>
+            <li>No external LLM API keys</li>
+            <li>All inference runs locally</li>
+          </ul>
+        </>
+      )}
+
+      {section.title === "# authentication_and_limits" && (
+        <>
+          <ul>
+            <li>API-key authentication</li>
+            <li>Rate limits enforced per key</li>
+          </ul>
+        </>
+      )}
+
+      {section.title === "# limitations" && (
+        <ul>
+          <li>// API keys stored in memory only</li>
+          <li>// Local LLM latency depends on hardware</li>
+          <li>// Not designed for high traffic</li>
+        </ul>
+      )}
+
+      {section.title === "# project_status" && (
+        <>
+          <p>
+            directio currently focuses on stable intent extraction, place
+            search, routing, and clean API contracts.
+          </p>
+
+          <p>
+            Source code:
+            <a
+              href="https://github.com/naufalhilmiaji/directio"
+              target="_blank"
+            >
+              github.com/naufalhilmiaji/directio
+            </a>
+          </p>
+        </>
+      )}
+    </CodeSection>
+  ))}
+</ProjectLayout>
