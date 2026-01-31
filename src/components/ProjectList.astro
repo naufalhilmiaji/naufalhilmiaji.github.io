@@ -1,0 +1,22 @@
+---
+interface Project {
+  slug: string;
+  title: string;
+  subtitle: string;
+}
+
+
+
+const { projects } = Astro.props as { projects: Project[] };
+---
+
+<ul class="project-list">
+  {projects.map((p) => (
+    <li>
+      <a href={`/projects/${p.slug}`}>
+        <strong>{p.title}</strong>
+        <p class="project-meta">{p.subtitle}</p>
+      </a>
+    </li>
+  ))}
+</ul>

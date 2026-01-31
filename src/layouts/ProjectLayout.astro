@@ -1,0 +1,12 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import ProjectHeader from "../components/ProjectHeader.astro";
+
+const { title, subtitle, tech } = Astro.props;
+---
+
+<BaseLayout title={title}>
+    <ProjectHeader title={title} subtitle={subtitle} meta={tech} line="01" />
+
+    <slot />
+</BaseLayout>

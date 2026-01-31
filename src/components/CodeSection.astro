@@ -1,0 +1,28 @@
+---
+const { index, title, foldable = false, summary = "expand" } = Astro.props;
+
+const lineNumber = String(index).padStart(2, "0");
+---
+
+<section class="code-section">
+    <div class="code-gutter">{lineNumber}</div>
+
+    <div class="code-content">
+        {title && <h2>{title}</h2>}
+
+        {
+            foldable ? (
+                <details>
+                    <summary>{summary}</summary>
+                    <div class="fold-content">
+                        <slot />
+                    </div>
+                </details>
+            ) : (
+                <div class="block">
+                    <slot />
+                </div>
+            )
+        }
+    </div>
+</section>

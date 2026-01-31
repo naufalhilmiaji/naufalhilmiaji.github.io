@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectHeader from "../../components/ProjectHeader.astro";
+import CodeSection from "../../components/CodeSection.astro";
+import { PROJECTS } from "../../data/projects";
+
+// Optional: sort projects alphabetically (stable default)
+const projects = [...PROJECTS].sort((a, b) =>
+  a.title.localeCompare(b.title)
+);
+---
+
+<BaseLayout title="Projects">
+
+  <ProjectHeader
+    title="Projects"
+    subtitle="All systems and tools developed and maintained by me"
+    line="01"
+    noCode
+  />
+
+  <CodeSection index={2} title="# python_based">
+    {projects.map((project) => (
+      <div class="project">
+        <div class="project-title">
+          <a href={`/projects/${project.slug}`}>
+            {project.title}
+          </a>
+        </div>
+
+        <div class="project-meta">
+          {project.tech.join(" · ")}
+        </div>
+
+        <p>
+          {project.subtitle}
+        </p>
+      </div>
+    ))}
+  </CodeSection>
+
+</BaseLayout>

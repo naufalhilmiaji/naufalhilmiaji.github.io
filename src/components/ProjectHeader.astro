@@ -1,0 +1,19 @@
+---
+const { title, subtitle, meta, noCode = false } = Astro.props;
+---
+
+<section class={`code-section ${noCode ? "no-code" : ""}`}>
+    <div class="code-content">
+        <h1>// {title}</h1>
+
+        {
+            subtitle && (
+                <p>
+                    <code>i</code> {subtitle}
+                </p>
+            )
+        }
+
+        {meta && <p class="project-meta">{meta}</p>}
+    </div>
+</section>
