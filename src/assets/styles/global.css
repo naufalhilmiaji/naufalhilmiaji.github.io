@@ -1012,7 +1012,8 @@ body.light .project-card:hover {
 .modal-content {
     position: relative;
     margin: 0 auto;
-    top: 6rem;
+    top: clamp(3.5rem, 8vh, 6rem);
+    /* padding-top: 3rem; */
 
     max-width: 720px;
     max-height: calc(100vh - 8rem);
@@ -1120,8 +1121,12 @@ body.light .project-card:hover {
 .modal-header,
 .modal-body,
 .modal-footer {
-    padding-left: 2rem;
+    padding-left: 1rem;
     padding-right: 1rem;
+}
+
+.modal-scroll {
+    /* padding: 0 2rem; */
 }
 
 .modal-header {

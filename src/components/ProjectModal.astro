@@ -22,7 +22,7 @@ const renderedEntries = await Promise.all(
         <div class="modal-scroll">
             {
                 renderedEntries.map(({ entry, Content }) => (
-                    <section
+                    <div
                         class="modal-panel"
                         data-project={entry.slug}
                         hidden
@@ -55,7 +55,7 @@ const renderedEntries = await Promise.all(
                                 → Read full case study
                             </a>
                         </footer>
-                    </section>
+                    </div>
                 ))
             }
         </div>
