@@ -42,18 +42,29 @@ body {
     margin: 0;
     background: var(--bg);
     color: var(--text-main);
+
     font-family:
         ui-monospace,
         SFMono-Regular,
         Menlo,
         Monaco,
         Consolas,
-        "Liberation Mono",
-        "Courier New",
         monospace;
-    line-height: 1.75;
-    font-size: 15.5px;
+
+    line-height: 1.6;
 }
+
+/* =========================
+   Breakpoints
+========================= */
+
+:root {
+    --bp-sm: 576px;
+    --bp-md: 768px;
+    --bp-lg: 992px;
+    --bp-xl: 1200px;
+}
+
 
 /* =========================
    Light Docs Theme
@@ -77,18 +88,54 @@ body.light {
 }
 
 /* =========================
-   Layout
+   Layout Container
 ========================= */
 
 main {
-    max-width: 980px;
-    margin: auto;
-    padding: 4rem 1.5rem 6rem;
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+}
+
+@media (min-width: 576px) {
+    main {
+        max-width: 540px;
+        padding-inline: 1.25rem;
+    }
+}
+
+@media (min-width: 768px) {
+    main {
+        max-width: 720px;
+        padding-inline: 1.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    main {
+        max-width: 900px;
+        padding-inline: 2rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    main {
+        max-width: 1040px;
+    }
 }
 
 section {
-    margin-top: 4.5rem;
+    margin-top: 2.5rem;
 }
+
+@media (min-width: 768px) {
+    section {
+        margin-top: 3.5rem;
+    }
+}
+
 
 /* =========================
    Theme Transition
@@ -99,6 +146,39 @@ html {
         background-color 0.25s ease,
         color 0.25s ease;
 }
+
+/* =========================
+   Typography Scale
+========================= */
+
+html {
+    font-size: 16px;
+}
+
+@media (min-width: 576px) {
+    html {
+        font-size: 16.5px;
+    }
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 17px;
+    }
+}
+
+@media (min-width: 992px) {
+    html {
+        font-size: 17.5px;
+    }
+}
+
+@media (min-width: 1200px) {
+    html {
+        font-size: 18px;
+    }
+}
+
 
 * {
     transition:
@@ -245,18 +325,15 @@ html {
 ========================= */
 
 h1 {
-    font-size: 2.6rem;
-    line-height: 1.2;
-    margin-bottom: 1.6rem;
-    color: var(--text-main);
+    font-size: 1.7rem;
+    line-height: 1.25;
+    margin-bottom: 1.2rem;
 }
 
 h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
     color: var(--accent);
     font-weight: 500;
-    letter-spacing: 0.02em;
 }
 
 h2::before {
@@ -265,9 +342,8 @@ h2::before {
 }
 
 h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 0.4rem;
-    color: var(--text-main);
 }
 
 p {
@@ -284,6 +360,7 @@ a:hover {
     text-decoration: underline;
 }
 
+
 button,
 input,
 select,
@@ -293,9 +370,44 @@ textarea {
     line-height: inherit;
 }
 
-/* =========================
-   Theme Toggle Icon
-========================= */
+.ui-button {
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 0.85rem;
+    line-height: 1;
+    padding: 0.35rem 0.55rem;
+    border-radius: 6px;
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+
+    transition:
+        color 0.15s ease,
+        border-color 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.ui-button:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background-color: var(--accent-soft);
+}
+
+.ui-button:active {
+    transform: translateY(1px);
+}
+
+.ui-button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
 
 /* =========================
    Theme Toggle (SVG)
@@ -306,8 +418,8 @@ textarea {
     align-items: center;
     justify-content: center;
 
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
 
     background: transparent;
     border: 1px solid var(--border);
@@ -380,6 +492,8 @@ body:not(.light) #icon-sun {
     opacity: 0;
     transform: translateY(12px);
     transition: opacity 0.4s ease, transform 0.4s ease;
+    content-visibility: auto;
+    contain-intrinsic-size: 400px;
 }
 
 .code-section.visible {
@@ -457,16 +571,16 @@ code {
     padding: 0.2em 0.45em;
     border-radius: 6px;
     color: var(--accent-alt);
-    border: 0.5px solid var(--accent-alt);
 }
 
 pre {
-    background: var(--code-color);
-    padding: 0.5rem 1.4rem;
-    border-radius: 10px;
+    background: var(--surface);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
     overflow-x: auto;
     border: 0.5px solid var(--accent-alt);
 }
+
 
 /* =========================
    Footer
@@ -751,4 +865,387 @@ details .fold-content {
 .nav-link:hover::after,
 .project-title a:hover::after {
     opacity: 1;
+}
+
+/* =========================
+   Project Cards
+========================= */
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.project-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem 1.25rem 1.1rem;
+    text-align: left;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.12s ease;
+}
+
+/* subtle depth */
+.project-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px transparent;
+}
+
+.project-card::before {
+    content: "↗";
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.project-card:hover::before {
+    opacity: 0.6;
+}
+
+
+.project-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+body.light .project-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   Card Content Hierarchy
+========================= */
+
+.project-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.project-card .subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+}
+
+/* tech stack = metadata, not prose */
+.project-card .project-meta {
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    margin-top: 0.25rem;
+}
+
+/* =========================
+   CTA Hint
+========================= */
+
+.project-card .hint {
+    margin-top: auto;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    opacity: 0.75;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.project-card:hover .hint {
+    opacity: 1;
+    color: var(--accent);
+}
+
+/* keyboard focus */
+.project-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* =========================
+   Modal Shell
+========================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+
+/* =========================
+   Backdrop
+========================= */
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+
+/* =========================
+   Modal Container
+========================= */
+
+.modal-content {
+    position: relative;
+    margin: 0 auto;
+    top: 6rem;
+
+    max-width: 720px;
+    max-height: calc(100vh - 8rem);
+
+    background: var(--bg);
+    border-radius: 12px;
+
+    /* critical: preserve rounded corners */
+    overflow: hidden;
+
+    animation: modal-in 0.15s ease-out;
+}
+
+
+/* =========================
+   Scroll Layer
+========================= */
+
+.modal-scroll {
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+}
+
+
+/* =========================
+   Modal Header
+========================= */
+
+.modal-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    padding-bottom: 1rem;
+    margin-bottom: 1.25rem;
+
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+
+/* Close button lives inside header */
+.modal-header .modal-close {
+    position: static;
+    flex-shrink: 0;
+}
+
+
+/* =========================
+   Modal Body
+========================= */
+
+.modal-body {
+    /* intentionally empty:
+       content flows naturally */
+}
+
+
+/* =========================
+   Modal Footer
+========================= */
+
+.modal-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.modal-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+
+/* =========================
+   Code Blocks (MDX)
+========================= */
+
+.modal-content .astro-code {
+    box-shadow: inset 0 0 0 1px var(--border);
+}
+
+
+/* =========================
+   Modal Paddings
+========================= */
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    padding-left: 2rem;
+    padding-right: 1rem;
+}
+
+.modal-header {
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.modal-body {
+    padding-top: 0;
+}
+
+.modal-footer {
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+}
+
+/* =========================
+   Header Scroll Shadow
+========================= */
+
+.modal-header {
+    transition: box-shadow 0.15s ease;
+}
+
+.modal-header.is-scrolled {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.light .modal-header.is-scrolled {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   Modal Animation
+========================= */
+
+.modal {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* backdrop fade */
+.modal-backdrop {
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+.modal.hidden .modal-backdrop {
+    opacity: 0;
+}
+
+/* modal lift */
+.modal-content {
+    transform: translateY(0);
+    opacity: 1;
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.modal.hidden .modal-content {
+    transform: translateY(-8px);
+    opacity: 0;
+}
+
+
+@keyframes modal-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   Mobile Enhancements
+========================= */
+
+@media (max-width: 480px) {
+    .project-card {
+        padding: 1.4rem;
+    }
+
+    .project-card .hint {
+        opacity: 1;
+    }
+}
+
+
+/* =========================
+   Code Blocks (Shiki / MDX)
+========================= */
+
+.astro-code {
+    background: var(--surface-soft) !important;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+
+    font-size: 0.85rem;
+    line-height: 1.5;
+
+    overflow-x: auto;
+}
+
+/* reset inner code */
+.astro-code code {
+    background: transparent !important;
+    padding: 0;
+}
+
+/* improve readability */
+.astro-code span {
+    font-style: normal !important;
 }

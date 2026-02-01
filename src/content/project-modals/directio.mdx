@@ -1,0 +1,109 @@
+---
+title: directio
+---
+
+## What problem does this solve?
+
+Many applications need map features such as place search or directions,
+but implementing this logic usually involves:
+
+- complex query parsing
+- multiple map APIs
+- vendor lock-in and billing requirements
+
+**directio** allows applications to accept **natural-language map requests**
+and turn them into **structured, map-ready results** without relying on
+paid or hosted services.
+
+---
+
+## What directio is (and is not)
+
+### It **is**
+- A backend API for natural-language place search and routing
+- A bridge between user intent and deterministic map execution
+- Designed to be consumed by web or mobile applications
+
+### It **is not**
+- A frontend map library
+- A general-purpose chatbot
+- A hosted LLM or map service
+
+---
+
+## Typical usage flow
+
+1. A user sends a natural-language query
+2. A local LLM extracts intent and parameters
+3. Backend providers execute geocoding or routing
+4. The API returns clean JSON for rendering on a map
+
+The LLM is used **only for intent extraction**.
+All external calls are handled by deterministic backend logic.
+
+---
+
+## Minimal example
+
+```bash
+curl -X POST http://127.0.0.1:8000/chat \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: directio_xxxxxxxxxxxxx" \
+  -d '{"message":"Where can I eat ramen near Sudirman Jakarta?"}'
+````
+
+Example response:
+
+```json
+{
+  "intent": "find_places",
+  "summary": "Ramen places near Sudirman Jakarta",
+  "places": [
+    {
+      "name": "Ramen 38",
+      "lat": -6.2275566,
+      "lon": 106.809542
+    }
+  ]
+}
+```
+
+---
+
+## Why local LLMs?
+
+directio uses a **local LLM** (via Ollama) to:
+
+* avoid sending user data to third-party APIs
+* keep behavior predictable and inspectable
+* ensure the system is fully runnable offline
+
+The LLM never calls map services directly.
+
+---
+
+## When should you use this?
+
+directio is suitable for:
+
+* map-based applications
+* location-aware dashboards
+* prototypes and demos without billing setup
+* systems that value transparency over black-box APIs
+
+It is not intended for high-traffic or latency-sensitive production use.
+
+---
+
+## Project status
+
+directio is under active development, focusing on:
+
+* stable intent extraction
+* place search and routing
+* clean API contracts
+* safe usage limits
+
+---
+
+*Read the full case study for architecture details and trade-offs.*

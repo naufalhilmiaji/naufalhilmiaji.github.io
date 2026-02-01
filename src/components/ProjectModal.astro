@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+const modalEntries = await getCollection("project-modals");
+
+// Pre-render MDX content
+const renderedEntries = await Promise.all(
+    modalEntries.map(async (entry) => {
+        const { Content } = await entry.render();
+        return { entry, Content };
+    }),
+);
+---
+
+<div id="project-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <!-- backdrop -->
+    <div class="modal-backdrop" data-modal-close></div>
+
+    <!-- modal window -->
+    <div class="modal-content">
+        <div class="modal-scroll">
+            {
+                renderedEntries.map(({ entry, Content }) => (
+                    <section
+                        class="modal-panel"
+                        data-project={entry.slug}
+                        hidden
+                    >
+                        <header class="modal-header">
+                            <h2 class="modal-title">// {entry.data.title}</h2>
+
+                            <button
+                                class="ui-button modal-close"
+                                aria-label="Close modal"
+                                title="Close (Esc)"
+                                data-modal-close
+                            >
+                                ×
+                            </button>
+                        </header>
+
+                        <article class="modal-body">
+                            <Content />
+                        </article>
+
+                        <footer class="modal-footer">
+                            <span class="modal-hint">
+                                Press <kbd>Esc</kbd> to close
+                            </span>
+                            <a
+                                class="ui-button"
+                                href={`/projects/${entry.slug}`}
+                            >
+                                → Read full case study
+                            </a>
+                        </footer>
+                    </section>
+                ))
+            }
+        </div>
+    </div>
+</div>

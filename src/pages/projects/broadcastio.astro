@@ -4,24 +4,26 @@ import CodeSection from "../../components/CodeSection.astro";
 
 const sections = [
   { title: "# context" },
-  { title: "# goals" },
-  { title: "# architecture" },
-  { title: "# channel_handling" },
-  { title: "# failure_modes", foldable: true },
-  { title: "# recovery_strategy", foldable: true },
-  { title: "# implementation_notes", foldable: true },
+  { title: "# problem_space" },
+  { title: "# design_goals" },
+  { title: "# system_architecture" },
+  { title: "# orchestration_model" },
+  { title: "# failure_handling", foldable: true },
+  { title: "# observability", foldable: true },
+  { title: "# providers", foldable: true },
+  { title: "# limitations", foldable: true },
   { title: "# project_status" },
 ];
 ---
 
 <ProjectLayout
   title="broadcastio"
-  subtitle="Multi-channel messaging orchestration for backend-driven automation"
-  tech="python · django · whatsapp-web · telegram · email · docker"
+  subtitle="Provider-agnostic message broadcasting with explicit failure semantics"
+  tech="python · django · whatsapp-web · email · orchestration · docker"
 >
   {sections.map((section, i) => (
     <CodeSection
-      index={i + 1}
+      index={i + 2}
       title={section.title}
       foldable={section.foldable}
       summary="expand"
@@ -29,78 +31,189 @@ const sections = [
       {section.title === "# context" && (
         <>
           <p>
-            Backend systems often require reliable outbound messaging across
-            multiple platforms with very different operational behaviors.
+            Backend systems often need to send notifications, alerts, or reports
+            to users or operators across multiple delivery channels.
           </p>
 
           <p>
-            <strong>broadcastio</strong> acts as a unified orchestration layer
-            that coordinates message delivery across channels.
+            These channels fail differently, recover unpredictably, and expose
+            inconsistent error semantics. As a result, delivery logic is often
+            duplicated, fragile, and difficult to reason about.
           </p>
         </>
       )}
 
-      {section.title === "# goals" && (
+      {section.title === "# problem_space" && (
+        <>
+          <p>
+            In real-world systems, outbound messaging is rarely a single API
+            call. Providers may be temporarily unavailable, rate-limited, or
+            partially successful.
+          </p>
+
+          <ul>
+            <li>One provider may fail while others succeed</li>
+            <li>Retries may be necessary but unsafe to apply blindly</li>
+            <li>Failures are often silent or poorly classified</li>
+          </ul>
+
+          <p>
+            Many systems respond by embedding complex retry and fallback logic
+            directly into application code.
+          </p>
+        </>
+      )}
+
+      {section.title === "# design_goals" && (
         <ul>
-          <li>Single backend interface for messaging</li>
-          <li>Support WhatsApp, Telegram, and email</li>
-          <li>Handle unreliable channels defensively</li>
+          <li>Separate delivery orchestration from application logic</li>
+          <li>Support multiple providers with a consistent interface</li>
+          <li>Make failures explicit and observable</li>
+          <li>Avoid hidden retries and implicit side effects</li>
+          <li>Remain usable as a library, not a standalone service</li>
         </ul>
       )}
 
-      {section.title === "# architecture" && (
+      {section.title === "# system_architecture" && (
         <pre>
-Backend Service (Django)
+Application / Backend
         │
         ▼
-broadcastio Core
- ├─ WhatsApp Worker
- ├─ Telegram Worker
- └─ Email Dispatcher
+broadcastio Orchestrator
+ ├─ Provider Adapter(s)
+ │    ├─ WhatsApp
+ │    ├─ Email
+ │    └─ Others
+ ├─ Retry & Fallback Logic
+ └─ Delivery Result Model
         </pre>
       )}
 
-      {section.title === "# channel_handling" && (
-        <ul>
-          <li>WhatsApp: session-based automation</li>
-          <li>Telegram: bot API acknowledgements</li>
-          <li>Email: SMTP-based delivery</li>
-        </ul>
+      {section.title === "# orchestration_model" && (
+        <>
+          <p>
+            broadcastio introduces an <strong>orchestrator</strong> that
+            coordinates delivery attempts across one or more providers.
+          </p>
+
+          <p>
+            Providers are tried in a defined order. Each attempt produces a
+            structured result that feeds into the final delivery outcome.
+          </p>
+
+          <pre>
+from broadcastio.core.orchestrator import Orchestrator
+from broadcastio.providers.whatsapp import WhatsAppProvider
+
+orch = Orchestrator([WhatsAppProvider(...)])
+result = orch.send(message)
+          </pre>
+
+          <p>
+            The orchestrator never hides failure. It always returns a
+            deterministic result object.
+          </p>
+        </>
       )}
 
-      {section.title === "# failure_modes" && (
-        <ul>
-          <li>// WhatsApp session invalidation</li>
-          <li>// Headless browser instability</li>
-          <li>// Partial delivery across channels</li>
-        </ul>
+      {section.title === "# failure_handling" && (
+        <>
+          <p>
+            A key design decision in broadcastio is the separation between
+            configuration errors and delivery failures.
+          </p>
+
+          <ul>
+            <li>
+              <strong>Exceptions</strong> indicate invalid setup or programmer
+              error
+            </li>
+            <li>
+              <strong>Delivery results</strong> indicate that delivery was
+              attempted
+            </li>
+          </ul>
+
+          <pre>
+if not result.success:
+    print(result.error.code, result.error.message)
+          </pre>
+
+          <p>
+            This distinction allows calling systems to respond defensively
+            without guessing what went wrong.
+          </p>
+        </>
       )}
 
-      {section.title === "# recovery_strategy" && (
-        <ul>
-          <li>Channel isolation and restarts</li>
-          <li>Defensive retries</li>
-          <li>Delivery state tracking</li>
-        </ul>
+      {section.title === "# observability" && (
+        <>
+          <p>
+            broadcastio exposes hooks that allow observing delivery attempts in
+            real time without affecting delivery flow.
+          </p>
+
+          <pre>
+def on_attempt(attempt):
+    print(attempt.provider, attempt.success)
+
+orch = Orchestrator(providers, on_attempt=on_attempt)
+          </pre>
+
+          <p>
+            This enables logging, tracing, or metrics without coupling them to
+            provider logic.
+          </p>
+        </>
       )}
 
-      {section.title === "# implementation_notes" && (
-        <p>
-          broadcastio is designed to be embedded into existing backend systems
-          rather than operating as a standalone service.
-        </p>
+      {section.title === "# providers" && (
+        <>
+          <p>
+            Providers are implemented as adapters that conform to a shared
+            interface.
+          </p>
+
+          <p>
+            For example, WhatsApp delivery is handled via an external Node.js
+            service based on WhatsApp Web. This service is intentionally kept
+            separate from the Python package.
+          </p>
+
+          <ul>
+            <li>No provider-specific logic leaks into the orchestrator</li>
+            <li>Providers can be swapped or extended</li>
+            <li>Commercial APIs can be added without redesign</li>
+          </ul>
+        </>
+      )}
+
+      {section.title === "# limitations" && (
+        <ul>
+          <li>// Not designed for conversational chat flows</li>
+          <li>// WhatsApp delivery depends on external automation</li>
+          <li>// APIs may evolve before 1.0.0</li>
+        </ul>
       )}
 
       {section.title === "# project_status" && (
-        <p>
-          Source code:
-          <a
-            href="https://github.com/naufalhilmiaji/broadcastio"
-            target="_blank"
-          >
-            github.com/naufalhilmiaji/broadcastio
-          </a>
-        </p>
+        <>
+          <p>
+            broadcastio is currently in <strong>alpha</strong>. Core orchestration
+            logic is implemented and tested, while provider integrations may
+            evolve.
+          </p>
+
+          <p>
+            Source code:
+            <a
+              href="https://github.com/naufalhilmiaji/broadcastio"
+              target="_blank"
+            >
+              github.com/naufalhilmiaji/broadcastio
+            </a>
+          </p>
+        </>
       )}
     </CodeSection>
   ))}

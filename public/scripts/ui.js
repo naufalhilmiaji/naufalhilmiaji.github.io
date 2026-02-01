@@ -236,6 +236,52 @@
     });
   }
 
+  function initProjectModal() {
+    const modal = document.getElementById("project-modal");
+    if (!modal) return;
+
+    const panels = modal.querySelectorAll(".modal-panel");
+    const closeBtn = modal.querySelector(".modal-close");
+    const backdrop = modal.querySelector(".modal-backdrop");
+
+    const scroll = modal.querySelector(".modal-scroll");
+    const header = modal.querySelector(".modal-header");
+
+    if (scroll && header) {
+      scroll.addEventListener("scroll", () => {
+        header.classList.toggle("is-scrolled", scroll.scrollTop > 4);
+      });
+    }
+
+    // OPEN MODAL
+    document.addEventListener("click", (e) => {
+      const card = e.target.closest("[data-project-card]");
+      if (!card) return;
+
+      const slug = card.dataset.projectSlug;
+      if (!slug) return;
+
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.project !== slug;
+      });
+
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    });
+
+    // CLOSE MODAL
+    function closeModal() {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    closeBtn?.addEventListener("click", closeModal);
+    backdrop?.addEventListener("click", closeModal);
+  }
 
   /* =========================
      Print / RFC Mode Shortcut
@@ -315,6 +361,7 @@
     initTOC();
     initFoldPersistence();
     initFoldPersistence();
+    initProjectModal();
   }
 
   // Run after DOM is ready

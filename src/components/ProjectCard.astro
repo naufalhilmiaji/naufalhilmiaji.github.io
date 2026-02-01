@@ -1,0 +1,20 @@
+---
+const { project } = Astro.props;
+---
+
+<button
+  type="button"
+  class="project-card"
+  data-project-card
+  data-project-slug={project.slug}
+>
+  <h3>{project.title}</h3>
+
+  <div class="block"><p class="subtitle">{project.subtitle}</p></div>
+
+  <div class="project-meta">
+    {project.tech.join(" · ")}
+  </div>
+
+  <span class="hint">Click to view usage</span>
+</button>
