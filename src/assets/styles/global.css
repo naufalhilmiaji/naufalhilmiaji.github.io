@@ -70,7 +70,7 @@ body {
    Light Docs Theme
 ========================= */
 
-body.light {
+html[data-theme="light"] {
     --bg: #ffffff;
     --surface: #f8fafc;
     --surface-soft: #f1f5f9;
@@ -346,7 +346,7 @@ h3 {
     margin-bottom: 0.4rem;
 }
 
-p {
+p, li {
     color: var(--text-muted);
     max-width: 75ch;
 }
@@ -438,11 +438,11 @@ textarea {
     display: none;
 }
 
-body.light #icon-moon {
+html[data-theme="light"] #icon-moon {
     display: inline;
 }
 
-body:not(.light) #icon-sun {
+html:not([data-theme="light"]) #icon-sun {
     display: inline;
 }
 
@@ -574,11 +574,9 @@ code {
 }
 
 pre {
-    background: var(--surface);
     padding: 0.75rem 1rem;
     border-radius: 8px;
     overflow-x: auto;
-    border: 0.5px solid var(--accent-alt);
 }
 
 
@@ -928,7 +926,7 @@ details .fold-content {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
-body.light .project-card:hover {
+html[data-theme="light"] .project-card:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
@@ -1155,7 +1153,7 @@ body.light .project-card:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-body.light .modal-header.is-scrolled {
+html[data-theme="light"] .modal-header.is-scrolled {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
@@ -1232,7 +1230,7 @@ body.light .modal-header.is-scrolled {
 
 .astro-code {
     background: var(--surface-soft) !important;
-    border: 1px solid var(--border);
+    box-shadow: inset 0 0 0 1px var(--border);
     border-radius: 10px;
 
     padding: 1rem 1.25rem;
@@ -1253,4 +1251,10 @@ body.light .modal-header.is-scrolled {
 /* improve readability */
 .astro-code span {
     font-style: normal !important;
+}
+
+html[data-theme='dark'] .astro-code,
+html[data-theme='dark'] .astro-code span {
+    background-color: var(--shiki-dark-bg) !important;
+    color: var(--shiki-dark) !important;
 }

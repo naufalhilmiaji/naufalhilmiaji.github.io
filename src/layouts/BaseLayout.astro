@@ -20,21 +20,19 @@ const breadcrumbLabels = Astro.props.breadcrumbLabels || {};
       (() => {
         try {
           const storedTheme = localStorage.getItem("theme");
-          const body = document.body;
+          const html = document.documentElement;
 
           if (storedTheme === "light") {
-            body.classList.add("light");
+            html.setAttribute("data-theme", "light");
           } else if (storedTheme === "dark") {
-            body.classList.remove("light");
+            html.setAttribute("data-theme", "dark");
           } else {
             // No stored preference → fall back to system preference
             const prefersLight = window.matchMedia(
               "(prefers-color-scheme: light)",
             ).matches;
 
-            if (prefersLight) {
-              body.classList.add("light");
-            }
+            html.setAttribute("data-theme", prefersLight ? "light" : "dark");
           }
         } catch (_) {}
       })();

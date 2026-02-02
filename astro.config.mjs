@@ -6,7 +6,7 @@ export default defineConfig({
   integrations: [mdx()],
   markdown: {
     shikiConfig: {
-      theme: {
+      themes: {
         light: "one-light",
         dark: "one-dark-pro",
       },
