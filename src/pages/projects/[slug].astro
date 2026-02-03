@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import { PROJECTS } from "../../data/projects";
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+export async function getStaticPaths() {
+    const entries = await getCollection("projects");
+
+    return entries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// find registry data
+const project = PROJECTS.find((p) => p.slug === entry.slug);
+
+if (!project) {
+    throw new Error(`Project metadata not found for ${entry.slug}`);
+}
+---
+
+<ProjectLayout
+    title={project.title}
+    subtitle={project.subtitle}
+    tech={project.tech}
+>
+    <Content />
+</ProjectLayout>

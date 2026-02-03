@@ -3,10 +3,11 @@ import BaseLayout from "./BaseLayout.astro";
 import ProjectHeader from "../components/ProjectHeader.astro";
 
 const { title, subtitle, tech } = Astro.props;
+const meta = tech.join(" · ");
 ---
 
 <BaseLayout title={title}>
-    <ProjectHeader title={title} subtitle={subtitle} meta={tech} line="01" />
+    <ProjectHeader title={title} subtitle={subtitle} meta={meta} line="01" />
 
     <slot />
 </BaseLayout>

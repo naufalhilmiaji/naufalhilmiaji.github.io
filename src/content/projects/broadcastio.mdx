@@ -1,0 +1,124 @@
+import CodeSection from "../../components/CodeSection.astro";
+
+<CodeSection index={2} title="# context">
+Backend systems need to send notifications, alerts, or reports
+to users or operators across multiple delivery channels.
+
+These channels fail differently, recover unpredictably, and expose
+inconsistent error semantics. As a result, delivery logic is often
+duplicated, fragile, and difficult to reason about.
+</CodeSection>
+
+<CodeSection index={3} title="# problem_space">
+In real-world systems, outbound messaging is rarely a single API call.
+Providers may be temporarily unavailable, rate-limited, or partially
+successful.
+
+- One provider may fail while others succeed
+- Retries may be necessary but unsafe to apply blindly
+- Failures are often silent or poorly classified
+
+Many systems respond by embedding complex retry and fallback logic
+directly into application code.
+</CodeSection>
+
+<CodeSection index={4} title="# design_goals">
+- Separate delivery orchestration from application logic
+- Support multiple providers with a consistent interface
+- Make failures explicit and observable
+- Avoid hidden retries and implicit side effects
+- Remain usable as a library, not a standalone service
+</CodeSection>
+
+<CodeSection index={5} title="# system_architecture">
+```text
+Application / Backend
+        │
+        ▼
+broadcastio Orchestrator
+ ├─ Provider Adapter(s)
+ │    ├─ WhatsApp
+ │    ├─ Email
+ │    └─ Others
+ ├─ Retry & Fallback Logic
+ └─ Delivery Result Model
+````
+
+</CodeSection>
+
+<CodeSection index={6} title="# orchestration_model">
+**broadcastio** introduces an **orchestrator** that coordinates delivery
+attempts across one or more providers.
+
+Providers are tried in a defined order. Each attempt produces a
+structured result that feeds into the final delivery outcome.
+
+```python
+from broadcastio.core.orchestrator import Orchestrator
+from broadcastio.providers.whatsapp import WhatsAppProvider
+
+orch = Orchestrator([WhatsAppProvider(...)])
+result = orch.send(message)
+```
+
+The orchestrator never hides failure. It always returns a deterministic
+result object.
+</CodeSection>
+
+<CodeSection index={7} title="# failure_handling" foldable summary="expand">
+A key design decision in **broadcastio** is the separation between
+configuration errors and delivery failures.
+
+* **Exceptions** indicate invalid setup or programmer error
+* **Delivery results** indicate that delivery was attempted
+
+```python
+if not result.success:
+    print(result.error.code, result.error.message)
+```
+
+This distinction allows calling systems to respond defensively without
+guessing what went wrong.
+</CodeSection>
+
+<CodeSection index={8} title="# observability" foldable summary="expand">
+**broadcastio** exposes hooks that allow observing delivery attempts in
+real time without affecting delivery flow.
+
+```python
+def on_attempt(attempt):
+    print(attempt.provider, attempt.success)
+
+orch = Orchestrator(providers, on_attempt=on_attempt)
+```
+
+This enables logging, tracing, or metrics without coupling them to
+provider logic.
+</CodeSection>
+
+<CodeSection index={9} title="# providers" foldable summary="expand">
+Providers are implemented as adapters that conform to a shared
+interface.
+
+For example, WhatsApp delivery is handled via an external Node.js
+service based on WhatsApp Web. This service is intentionally kept
+separate from the Python package.
+
+* No provider-specific logic leaks into the orchestrator
+* Providers can be swapped or extended
+* Commercial APIs can be added without redesign
+</CodeSection>
+
+<CodeSection index={10} title="# limitations" foldable summary="expand">
+- // Not designed for conversational chat flows
+- // WhatsApp delivery depends on external automation
+- // APIs may evolve before 1.0.0
+</CodeSection>
+
+<CodeSection index={11} title="# project_status">
+**broadcastio** is currently in **alpha**. Core orchestration logic is
+implemented and tested, while provider integrations may evolve.
+
+Source code:
+[https://github.com/naufalhilmiaji/broadcastio](https://github.com/naufalhilmiaji/broadcastio)
+</CodeSection>

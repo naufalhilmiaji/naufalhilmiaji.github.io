@@ -1,0 +1,114 @@
+import CodeSection from "../../components/CodeSection.astro";
+
+<CodeSection index={2} title="# context">
+Many modern applications require location-aware features such as place search,
+routing, or directions. Implementing this logic typically involves complex
+integrations with geocoding, search, and mapping services.
+
+At the same time, users increasingly expect to interact with these systems using
+natural language rather than rigid query parameters.
+</CodeSection>
+
+<CodeSection index={3} title="# problem_space">
+Bridging natural-language input with map-based functionality introduces several
+challenges:
+
+- Intent extraction from ambiguous user input
+- Reliable execution of geocoding and routing
+- Clear separation between inference and side effects
+- Avoiding vendor lock-in and payment-gated APIs
+
+Many systems delegate too much responsibility to hosted LLMs or tightly couple
+inference with external API calls.
+</CodeSection>
+
+<CodeSection index={4} title="# design_goals">
+- Accept natural-language map queries via a clean backend API
+- Use an LLM strictly for intent and parameter extraction
+- Execute all map-related logic deterministically
+- Avoid paid or gated external services
+- Return frontend-ready, map-compatible JSON
+</CodeSection>
+
+<CodeSection index={5} title="# system_architecture">
+```text
+Client (Web / Mobile)
+        │
+        ▼
+directio API (FastAPI)
+ ├─ Intent Extraction (Local LLM)
+ ├─ Validation & Parsing
+ ├─ Provider Layer
+ │    ├─ Geocoding (Photon)
+ │    └─ Routing (OSRM)
+ └─ Response Formatter (JSON)
+```
+
+</CodeSection>
+
+<CodeSection index={6} title="# intent_vs_execution">
+A core architectural decision in directio is the strict separation between
+**intent understanding** and **backend execution**.
+
+The LLM is used only to extract structured intent and parameters from
+natural-language input.
+
+* The LLM never calls external APIs
+* All map queries are executed by backend providers
+* LLM output is validated before execution
+
+This design prevents hallucinated requests from directly triggering external
+side effects.
+</CodeSection>
+
+<CodeSection index={7} title="# provider_choices" foldable>
+directio intentionally relies on OpenStreetMap-based services for geocoding and
+routing.
+
+* No billing verification or payment setup
+* Fully runnable and reviewable by anyone
+* Widely used open alternatives
+
+The provider layer is architecture-agnostic. Replacing Photon or OSRM with
+commercial APIs would primarily involve adapter changes rather than a system
+redesign.
+</CodeSection>
+
+<CodeSection index={8} title="# authentication_and_limits" foldable>
+**directio** exposes a public API intended for experimentation and controlled usage.
+
+* API-key authentication
+* One API key per email address
+* Rate limits enforced per API key
+* Key creation endpoint is IP-rate-limited
+
+This keeps the service usable while preventing abuse.
+</CodeSection>
+
+<CodeSection index={9} title="# llm_setup" foldable>
+**directio** uses a local LLM served via Ollama, running in Docker.
+
+* No external LLM API keys
+* No user data sent to third parties
+* Reproducible environment via containerization
+
+The system tolerates imperfect LLM output through validation and fallback logic
+in the backend.
+</CodeSection>
+
+<CodeSection index={10} title="# limitations" foldable>
+- // API keys are stored in memory only
+- // Local LLM latency depends on hardware
+- // Not designed for high-traffic production use
+</CodeSection>
+
+<CodeSection index={11} title="# project_status">
+**directio** currently focuses on stable intent extraction, place search, routing,
+and clean API contracts.
+
+Planned improvements include persistent key storage, usage metrics, frontend
+examples, and additional provider adapters.
+
+Source code: <a href="https://github.com/naufalhilmiaji/directio" target="_blank">
+github.com/naufalhilmiaji/directio </a>
+</CodeSection>

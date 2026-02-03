@@ -7,4 +7,7 @@ export const collections = {
             title: z.string(),
         }),
     }),
+    projects: defineCollection({
+        type: "content",
+    }),
 };
