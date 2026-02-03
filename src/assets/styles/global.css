@@ -93,47 +93,11 @@ html[data-theme="light"] {
 
 main {
     width: 100%;
+    max-width: min(1040px, 100% - 2rem);
     margin-inline: auto;
-    padding-inline: 1rem;
-    padding-top: 3rem;
-    padding-bottom: 5rem;
-}
-
-@media (min-width: 576px) {
-    main {
-        max-width: 540px;
-        padding-inline: 1.25rem;
-    }
-}
-
-@media (min-width: 768px) {
-    main {
-        max-width: 720px;
-        padding-inline: 1.5rem;
-    }
-}
-
-@media (min-width: 992px) {
-    main {
-        max-width: 900px;
-        padding-inline: 2rem;
-    }
-}
-
-@media (min-width: 1200px) {
-    main {
-        max-width: 1040px;
-    }
-}
-
-section {
-    margin-top: 2.5rem;
-}
-
-@media (min-width: 768px) {
-    section {
-        margin-top: 3.5rem;
-    }
+    padding-inline: clamp(1rem, 3vw + 0.5rem, 2rem);
+    padding-top: clamp(2rem, 5vh, 3rem);
+    padding-bottom: clamp(3rem, 8vh, 5rem);
 }
 
 
@@ -346,7 +310,8 @@ h3 {
     margin-bottom: 0.4rem;
 }
 
-p, li {
+p,
+li {
     color: var(--text-muted);
     max-width: 75ch;
 }
@@ -370,38 +335,46 @@ textarea {
     line-height: inherit;
 }
 
-.ui-button {
-    appearance: none;
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    font-family: inherit;
-    font-size: 0.85rem;
-    line-height: 1;
-    padding: 0.35rem 0.55rem;
-    border-radius: 6px;
-    cursor: pointer;
+/* =========================
+   Global UI Button
+========================= */
 
+.ui-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.25rem;
+    gap: 0.4rem;
 
+    height: 32px;
+    padding: 0 0.6rem;
+
+    font-family: inherit;
+    font-size: 0.75rem;
+    line-height: 1;
+
+    background: var(--surface);
+    color: var(--text-muted);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    cursor: pointer;
     transition:
+        background 0.15s ease,
         color 0.15s ease,
-        border-color 0.15s ease,
-        background-color 0.15s ease;
+        border-color 0.15s ease;
 }
 
 .ui-button:hover {
-    color: var(--accent);
+    color: var(--text-main);
+    background-color: var(--surface-soft);
     border-color: var(--accent);
-    background-color: var(--accent-soft);
 }
 
 .ui-button:active {
-    transform: translateY(1px);
+    transform: translateY(0.5px);
 }
+
 
 .ui-button:focus-visible {
     outline: 2px solid var(--accent);
@@ -410,7 +383,7 @@ textarea {
 
 
 /* =========================
-   Theme Toggle (SVG)
+   Theme Toggle (Lucide Icons)
 ========================= */
 
 #theme-toggle {
@@ -434,24 +407,24 @@ textarea {
     border-color: var(--accent);
 }
 
+/* Hide both icons by default */
 #theme-toggle svg {
     display: none;
 }
 
+/* Show moon in light mode */
 html[data-theme="light"] #icon-moon {
     display: inline;
 }
 
+/* Show sun in dark mode */
 html:not([data-theme="light"]) #icon-sun {
     display: inline;
 }
 
-#theme-icon {
-    transition: transform 0.15s ease;
-}
-
-#theme-toggle:hover #theme-icon {
+#theme-toggle:hover svg {
     transform: rotate(15deg);
+    transition: transform 0.15s ease;
 }
 
 
@@ -567,7 +540,7 @@ html:not([data-theme="light"]) #icon-sun {
 ========================= */
 
 code {
-    background: var(--code-color);
+    background: transparent;
     padding: 0.2em 0.45em;
     border-radius: 6px;
     color: var(--accent-alt);
@@ -1253,8 +1226,119 @@ html[data-theme="light"] .modal-header.is-scrolled {
     font-style: normal !important;
 }
 
+.astro-code pre {
+    position: relative;
+}
+
+/* copy button */
+.astro-code pre::before {
+    content: "Copy";
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
 html[data-theme='dark'] .astro-code,
 html[data-theme='dark'] .astro-code span {
     background-color: var(--shiki-dark-bg) !important;
     color: var(--shiki-dark) !important;
+}
+
+.code-pre {
+    position: relative;
+    background: var(--surface-soft);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+/* line numbers only here */
+.code-pre.line-numbers {
+    counter-reset: line;
+}
+
+/* diagrams */
+.diagram-block {
+    background: var(--surface-soft);
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+}
+
+.astro-code .line:empty::before {
+    display: none;
+}
+
+.diagram-block .line::before {
+    display: none !important;
+}
+
+.code-block {
+    position: relative;
+}
+
+.code-block .code-copy {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-2px);
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
+}
+
+.code-block .astro-code {
+    padding-top: 2.2rem !important;
+}
+
+/* Show on hover or focus */
+.code-block:hover .code-copy,
+.code-block:focus-within .code-copy {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.code-lang {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.6rem;
+
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+
+    color: var(--text-muted);
+    background: var(--surface);
+
+    padding: 0.15rem 0.4rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+
+    z-index: 2;
+}
+
+.diagram-text {
+    font-family: var(--font-mono);
+    white-space: pre;
+    color: var(--text-muted);
+}
+
+.diagram-text::before {
+    content: "▸ ";
+    opacity: 0.4;
+}
+
+.diagram-text[data-emphasis="true"] {
+    color: var(--accent);
+}
+
+.diagram-line {
+    animation: fade-in 0.3s ease forwards;
 }

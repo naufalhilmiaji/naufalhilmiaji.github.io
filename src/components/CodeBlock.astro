@@ -1,0 +1,19 @@
+---
+import { Copy } from "@lucide/astro/icons/index";
+
+const { language } = Astro.props;
+---
+
+<div class="code-block" data-language={language}>
+    {language && <span class="code-lang">{language}</span>}
+
+    <button
+        class="ui-button code-copy"
+        aria-label="Copy code"
+        title="Copy code"
+    >
+        <Copy size={16} /> Copy
+    </button>
+
+    <slot />
+</div>

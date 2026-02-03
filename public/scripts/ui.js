@@ -355,6 +355,19 @@
     observer.observe(s);
   });
 
+  document.querySelectorAll(".code-block").forEach(block => {
+    const btn = block.querySelector(".code-copy");
+    const code = block.querySelector("pre.astro-code");
+
+    if (!btn || !code) return;
+
+    btn.addEventListener("click", async () => {
+      const text = code.innerText;
+      await navigator.clipboard.writeText(text);
+      btn.textContent = "Copied!";
+      setTimeout(() => (btn.textContent = "Copy"), 1200);
+    });
+  });
 
 
   function initUI() {

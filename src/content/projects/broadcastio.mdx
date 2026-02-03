@@ -1,4 +1,7 @@
 import CodeSection from "../../components/CodeSection.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+import DiagramBlock from "../../components/DiagramBlock.astro";
+import { broadcastioArchitecture } from "../../diagrams/broadcastio";
 
 <CodeSection index={2} title="# context">
 Backend systems need to send notifications, alerts, or reports
@@ -31,19 +34,7 @@ directly into application code.
 </CodeSection>
 
 <CodeSection index={5} title="# system_architecture">
-```text
-Application / Backend
-        │
-        ▼
-broadcastio Orchestrator
- ├─ Provider Adapter(s)
- │    ├─ WhatsApp
- │    ├─ Email
- │    └─ Others
- ├─ Retry & Fallback Logic
- └─ Delivery Result Model
-````
-
+<DiagramBlock data={broadcastioArchitecture} />
 </CodeSection>
 
 <CodeSection index={6} title="# orchestration_model">
@@ -53,6 +44,7 @@ attempts across one or more providers.
 Providers are tried in a defined order. Each attempt produces a
 structured result that feeds into the final delivery outcome.
 
+<CodeBlock language="python">
 ```python
 from broadcastio.core.orchestrator import Orchestrator
 from broadcastio.providers.whatsapp import WhatsAppProvider
@@ -60,7 +52,7 @@ from broadcastio.providers.whatsapp import WhatsAppProvider
 orch = Orchestrator([WhatsAppProvider(...)])
 result = orch.send(message)
 ```
-
+</CodeBlock>
 The orchestrator never hides failure. It always returns a deterministic
 result object.
 </CodeSection>
@@ -72,10 +64,12 @@ configuration errors and delivery failures.
 * **Exceptions** indicate invalid setup or programmer error
 * **Delivery results** indicate that delivery was attempted
 
+<CodeBlock language="python">
 ```python
 if not result.success:
     print(result.error.code, result.error.message)
 ```
+</CodeBlock>
 
 This distinction allows calling systems to respond defensively without
 guessing what went wrong.

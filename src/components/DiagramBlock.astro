@@ -1,0 +1,15 @@
+---
+import TreeDiagram from "./TreeDiagram.astro";
+import type { DiagramNode } from "../types/diagram";
+
+const { data } = Astro.props as {
+    data: DiagramNode;
+};
+---
+
+<pre
+    class="diagram-block">
+  <code>
+    <TreeDiagram root={data} />
+  </code>
+</pre>

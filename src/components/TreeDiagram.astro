@@ -1,0 +1,33 @@
+---
+import type { DiagramNode } from "../types/diagram";
+
+const { root } = Astro.props as {
+    root: DiagramNode;
+};
+
+function renderNode(node: DiagramNode, prefix = "", isLast = true): string {
+    if (!node) return "";
+
+    const branch = prefix ? (isLast ? "└─ " : "├─ ") : "";
+    const line = `${prefix}${branch}${node.label}`;
+
+    if (!node.children || node.children.length === 0) {
+        return line;
+    }
+
+    const nextPrefix = prefix + (isLast ? "   " : "│  ");
+
+    const children = node.children
+        .filter(Boolean)
+        .map((child, i, arr) =>
+            renderNode(child, nextPrefix, i === arr.length - 1),
+        )
+        .join("\n");
+
+    return `${line}\n${children}`;
+}
+
+const output = renderNode(root);
+---
+
+{output}
