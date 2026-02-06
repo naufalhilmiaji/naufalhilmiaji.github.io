@@ -474,6 +474,21 @@ html:not([data-theme="light"]) #icon-sun {
     transform: translateY(0);
 }
 
+.code-section.is-modal {
+    display: block;
+    margin-top: 0;
+
+    /* neutralize animation & layout behaviors */
+    opacity: 1;
+    transform: none;
+    transition: none;
+
+    /* disable render optimizations that break modals */
+    content-visibility: visible;
+    contain-intrinsic-size: auto;
+}
+
+
 .code-gutter {
     color: var(--text-muted);
     font-size: 0.75rem;

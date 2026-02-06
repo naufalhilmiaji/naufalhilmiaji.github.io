@@ -1,9 +1,10 @@
 ---
 title: directio
 ---
+import CodeSection from "../../components/CodeSection.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
 
-## What problem does this solve?
-
+<CodeSection title="# problem_statement">
 Many applications need map features such as place search or directions,
 but implementing this logic usually involves:
 
@@ -14,11 +15,11 @@ but implementing this logic usually involves:
 **directio** allows applications to accept **natural-language map requests**
 and turn them into **structured, map-ready results** without relying on
 paid or hosted services.
+</CodeSection>
 
 ---
 
-## What directio is (and is not)
-
+<CodeSection title="# it_is_and_is_not">
 ### It **is**
 - A backend API for natural-language place search and routing
 - A bridge between user intent and deterministic map execution
@@ -28,11 +29,11 @@ paid or hosted services.
 - A frontend map library
 - A general-purpose chatbot
 - A hosted LLM or map service
+</CodeSection>
 
 ---
 
-## Typical usage flow
-
+<CodeSection title="# usage_overview">
 1. A user sends a natural-language query
 2. A local LLM extracts intent and parameters
 3. Backend providers execute geocoding or routing
@@ -40,20 +41,23 @@ paid or hosted services.
 
 The LLM is used **only for intent extraction**.
 All external calls are handled by deterministic backend logic.
+</CodeSection>
 
 ---
 
-## Minimal example
-
+<CodeSection title="# minimal_example">
+<CodeBlock language="bash">
 ```bash
 curl -X POST http://127.0.0.1:8000/chat \
   -H "Content-Type: application/json" \
   -H "X-API-Key: directio_xxxxxxxxxxxxx" \
   -d '{"message":"Where can I eat ramen near Sudirman Jakarta?"}'
-````
+```
+</CodeBlock>
 
 Example response:
 
+<CodeBlock language="json">
 ```json
 {
   "intent": "find_places",
@@ -67,24 +71,25 @@ Example response:
   ]
 }
 ```
+</CodeBlock>
+</CodeSection>
 
 ---
 
-## Why local LLMs?
-
-directio uses a **local LLM** (via Ollama) to:
+<CodeSection title="# local_llm_preference">
+**directio** uses a **local LLM** (via Ollama) to:
 
 * avoid sending user data to third-party APIs
 * keep behavior predictable and inspectable
 * ensure the system is fully runnable offline
 
 The LLM never calls map services directly.
+</CodeSection>
 
 ---
 
-## When should you use this?
-
-directio is suitable for:
+<CodeSection title="# usage_scenarios">
+**directio** is suitable for:
 
 * map-based applications
 * location-aware dashboards
@@ -92,17 +97,18 @@ directio is suitable for:
 * systems that value transparency over black-box APIs
 
 It is not intended for high-traffic or latency-sensitive production use.
+</CodeSection>
 
 ---
 
-## Project status
-
-directio is under active development, focusing on:
+<CodeSection title="# project_status">
+**directio** is under active development, focusing on:
 
 * stable intent extraction
 * place search and routing
 * clean API contracts
 * safe usage limits
+</CodeSection>
 
 ---
 

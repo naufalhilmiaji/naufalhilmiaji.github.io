@@ -1,9 +1,10 @@
 ---
 title: broadcastio
 ---
+import CodeSection from "../../components/CodeSection.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
 
-## What problem does this solve?
-
+<CodeSection title="# problem_statement">
 Backend systems often need to send **notifications, alerts, or reports**
 across multiple delivery channels that fail in different and unpredictable ways.
 
@@ -15,11 +16,11 @@ Typical issues include:
 
 **broadcastio** acts as a **single orchestration layer**
 that attempts delivery across providers with **explicit failure semantics**.
+</CodeSection>
 
 ---
 
-## What broadcastio is (and is not)
-
+<CodeSection title="# it_is_and_is_not">
 ### It **is**
 - A Python **orchestration layer** for outbound messages
 - A way to attempt delivery across one or more providers
@@ -30,11 +31,11 @@ that attempts delivery across providers with **explicit failure semantics**.
 - A chatbot framework
 - An inbound message handler
 - A WhatsApp automation system by itself
+</CodeSection>
 
 ---
 
-## Typical usage flow
-
+<CodeSection title="# usage_overview">
 1. Register one or more delivery providers
 2. Define a message payload
 3. Dispatch via the orchestrator
@@ -42,11 +43,12 @@ that attempts delivery across providers with **explicit failure semantics**.
 
 The caller always receives a **deterministic result object** —
 even when delivery fails.
+</CodeSection>
 
 ---
 
-## Minimal example
-
+<CodeSection title="# minimal_example">
+<CodeBlock language="python">
 ```python
 from broadcastio.core.orchestrator import Orchestrator
 from broadcastio.providers.whatsapp import WhatsAppProvider
@@ -63,29 +65,32 @@ result = orch.send(
 )
 
 print(result.success)
-````
+```
+</CodeBlock>
+</CodeSection>
 
 ---
 
-## Failure-aware by design
-
-broadcastio distinguishes clearly between:
+<CodeSection title="# failure_handling_overview">
+**broadcastio** distinguishes clearly between:
 
 * **Exceptions** → configuration or programmer errors
 * **Delivery results** → delivery was attempted but failed
 
+<CodeBlock language="python">
 ```python
 if not result.success:
     print(result.error.code, result.error.message)
 ```
+</CodeBlock>
 
 This makes failures **observable and actionable** instead of silent.
+</CodeSection>
 
 ---
 
-## When should you use this?
-
-broadcastio is well-suited for:
+<CodeSection title="# usage_scenarios">
+**broadcastio** is well-suited for:
 
 * Infrastructure alerts
 * Scheduled backend reports
@@ -93,11 +98,11 @@ broadcastio is well-suited for:
 * Systems that require **defensive delivery guarantees**
 
 It is intentionally **not optimized** for conversational flows.
+</CodeSection>
 
 ---
 
-## Providers & architecture note
-
+<CodeSection title="# provider_architecture">
 Providers (WhatsApp, Email, etc.) are implemented as **adapters**.
 
 For example:
@@ -107,14 +112,15 @@ For example:
 * This service is **not bundled** with the Python package
 
 The provider layer is intentionally swappable.
+</CodeSection>
 
 ---
 
-## Project status
-
+<CodeSection title="# project_status">
 * Status: **Alpha**
 * APIs may evolve before 1.0.0
 * Core orchestration logic is tested and stable
+</CodeSection>
 
 ---
 

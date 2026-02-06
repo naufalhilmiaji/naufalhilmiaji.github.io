@@ -1,0 +1,175 @@
+import CodeSection from "../../components/CodeSection.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+import DiagramBlock from "../../components/DiagramBlock.astro";
+import { dotnetWebAPIArchitecture } from "../../diagrams/dotnetwebapi";
+
+<CodeSection index={2} title="# context">
+**DotnetWebAPI** is a backend training project built with **ASP.NET Core Web API**
+to demonstrate **Clean Architecture**, **JWT-based authentication**, and
+**role-aware order ownership**.
+
+The system simulates a real-world **ordering backend** with multiple concerns:
+authentication, authorization, data ownership, notifications, and reporting.
+</CodeSection>
+
+<CodeSection index={3} title="# problem_space">
+Typical backend systems often suffer from:
+
+- Controllers that mix HTTP handling and business logic
+- Weak separation between domain rules and infrastructure
+- Authorization checks scattered across controllers
+- Entities exposed directly to API consumers
+
+This project was designed to explicitly avoid those pitfalls.
+</CodeSection>
+
+<CodeSection index={4} title="# design_goals">
+- Enforce **Clean Architecture** boundaries
+- Keep controllers thin and declarative
+- Centralize business logic in application services
+- Apply **role-based authorization** consistently
+- Enforce **order ownership** at the service level
+- Integrate infrastructure concerns without leaking abstractions
+</CodeSection>
+
+<CodeSection index={5} title="# system_architecture">
+<DiagramBlock data={dotnetWebAPIArchitecture} />
+</CodeSection>
+
+<CodeSection index={6} title="# clean_architecture_principles">
+The project follows standard Clean Architecture principles:
+
+- Controllers only handle HTTP concerns
+- Application layer contains all business rules
+- Domain entities are persistence-agnostic
+- Infrastructure (DB, email, SignalR) is isolated
+- Dependencies point **inward**, never outward
+</CodeSection>
+
+<CodeSection index={7} title="# authentication_and_authorization">
+Authentication is implemented using **JWT**.
+
+- Users register and log in via dedicated endpoints
+- JWT token is issued on successful login
+- Authorization is enforced via roles:
+  - **ADMIN**: full access
+  - **USER**: access limited to owned orders
+
+Token usage:
+
+<CodeBlock language="http">
+```http
+Authorization: Bearer <JWT_TOKEN>
+```
+</CodeBlock>
+</CodeSection>
+
+<CodeSection index={8} title="# order_ownership">
+Order ownership is enforced at the **service layer**, not the controller.
+
+* ADMIN can access all orders
+* USER can only access orders they created
+* Ownership checks are part of business logic
+* Prevents accidental data leaks at the API level
+
+</CodeSection>
+
+<CodeSection index={9} title="# order_api">
+Create order:
+
+<CodeBlock language="http">
+```http
+POST /api/orders
+```
+</CodeBlock>
+
+<CodeBlock language="json">
+```json
+{
+  "customerId": "GUID",
+  "items": [
+    {
+      "productName": "Mouse",
+      "quantity": 2,
+      "price": 150000
+    }
+  ]
+}
+```
+</CodeBlock>
+
+Retrieve orders:
+
+* ADMIN → all orders
+* USER → owned orders only
+
+<CodeBlock language="http">
+```http
+GET /api/orders
+```
+</CodeBlock>
+
+</CodeSection>
+
+<CodeSection index={10} title="# real_time_notifications">
+The system integrates **SignalR** for real-time updates.
+
+* Hub endpoint: `/orderHub`
+* Notifications are sent when order status changes
+* Supports non-.NET clients (e.g. Node.js)
+
+This simulates event-driven backend behavior.
+</CodeSection>
+
+<CodeSection index={11} title="# email_and_export">
+Additional infrastructure features:
+
+* **Email notification**
+
+  * SMTP-based
+  * Configured via `appsettings.json`
+* **Excel export**
+
+  * Export orders to `.xlsx`
+  * Implemented using **ClosedXML**
+  * Useful for reporting and admin workflows
+
+</CodeSection>
+
+<CodeSection index={12} title="# running_the_project" foldable summary="expand">
+<CodeBlock language="bash">
+```bash
+dotnet restore
+dotnet ef database update
+dotnet run
+```
+</CodeBlock>
+
+Development mode:
+
+<CodeBlock language="bash">
+```bash
+dotnet watch run
+```
+</CodeBlock>
+
+Swagger UI:
+
+```
+http://localhost:5197/swagger
+```
+
+</CodeSection>
+
+<CodeSection index={13} title="# project_status">
+This project is a **training-focused backend system** designed to demonstrate:
+
+* Clean Architecture in ASP.NET Core
+* JWT authentication & authorization
+* Ownership-aware business rules
+* EF Core with SQL Server
+* Real-time messaging with SignalR
+* Infrastructure integration without tight coupling
+
+Source code is intended for learning and architectural review.
+</CodeSection>

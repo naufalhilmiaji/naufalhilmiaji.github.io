@@ -1,11 +1,11 @@
 ---
 const { index, title, foldable = false, summary = "expand" } = Astro.props;
 
-const lineNumber = String(index).padStart(2, "0");
+const lineNumber = index !== undefined ? String(index).padStart(2, "0") : "";
 ---
 
-<section class="code-section">
-    <div class="code-gutter">{lineNumber}</div>
+<section class={lineNumber == "" ? "code-section is-modal" : "code-section"}>
+    {lineNumber &&<div class="code-gutter">{lineNumber}</div>}
 
     <div class="code-content">
         {title && <h2>{title}</h2>}

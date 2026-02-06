@@ -1,0 +1,104 @@
+---
+title: dotnetwebapi
+---
+import CodeSection from "../../components/CodeSection.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+
+<CodeSection title="# problem_statement">
+Many backend training projects stop at simple CRUD and fail to demonstrate
+**real architectural boundaries**, **authorization rules**, and
+**ownership-aware business logic**.
+
+dotnetwebapi was built to simulate a realistic backend system where
+authentication, authorization, and infrastructure concerns must coexist
+without leaking into each other.
+</CodeSection>
+
+---
+
+<CodeSection title="# it_is_and_is_not">
+### It **is**
+
+- A Clean Architecture–based ASP.NET Core Web API
+- A training project for backend system design
+- An example of JWT authentication and role-based authorization
+- A simulation of an ordering backend with real constraints
+
+### It **is not**
+
+- A production-ready e-commerce system
+- A frontend-facing application
+- A reusable framework or library
+</CodeSection>
+
+---
+
+<CodeSection title="# usage_overview">
+The API exposes endpoints for:
+
+- User registration and login (JWT)
+- Order creation with multiple items
+- Role-aware order access (ADMIN vs USER)
+- Order status updates
+- Notifications and reporting features
+
+Business rules are enforced in the **application layer**, not in controllers.
+</CodeSection>
+
+---
+
+<CodeSection title="# minimal_example">
+<CodeBlock language="http">
+```http
+POST /api/orders
+Authorization: Bearer <JWT_TOKEN>
+```
+</CodeBlock>
+
+<CodeBlock language="json">
+```json
+{
+  "customerId": "<GUID>",
+  "items": [
+    {
+      "productName": "Mouse",
+      "quantity": 2,
+      "price": 150000
+    }
+  ]
+}
+```
+</CodeBlock>
+
+Access to this endpoint depends on user role and ownership rules.
+</CodeSection>
+
+---
+
+<CodeSection title="# local_llm_preference">
+
+Not applicable.
+
+This project focuses on **deterministic backend logic** rather than
+LLM-assisted behavior.
+</CodeSection>
+
+---
+
+<CodeSection title="# usage_scenarios">
+* Backend Clean Architecture training
+* JWT authentication & authorization exercises
+* EF Core + SQL Server practice
+* Ownership-aware business rule implementation
+* SignalR and email integration examples
+</CodeSection>
+
+---
+
+<CodeSection title="# project_status">
+dotnetwebapi is a **training-focused backend project** intended for
+architectural learning and system design practice.
+
+The codebase prioritizes clarity and separation of concerns over feature
+completeness.
+</CodeSection>

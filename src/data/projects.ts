@@ -43,8 +43,23 @@ POST /api/broadcast
     slug: "directio",
     title: "directio",
     subtitle: "Natural-language to maps API using local LLMs and open map data",
-    tech: ["fastapi", "ollama", "openstreetmap", "osrm", "docker"],
+    tech: ["python", "fastapi", "ollama", "openstreetmap", "osrm", "docker"],
     tags: ["infrastructure", "monitoring"],
     featured: true,
   },
+  {
+    slug: "dotnetwebapi",
+    title: "dotnetwebapi",
+    subtitle:
+      "ASP.NET Core Web API implementing Clean Architecture, JWT authentication, and order ownership",
+    tech: [
+      "dotnet",
+      "aspnet-core",
+      "entity-framework-core",
+      "sql-server",
+      "jwt",
+      "signalr",
+    ],
+    tags: ["backend", "clean-architecture", "training"],
+  }
 ];

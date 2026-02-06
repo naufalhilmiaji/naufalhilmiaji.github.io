@@ -7,10 +7,13 @@ import { PROJECTS } from "../../data/projects";
 import ProjectCard from "../../components/ProjectCard.astro";
 import ProjectModal from "../../components/ProjectModal.astro";
 
-const featured = PROJECTS.filter((p) => p.featured);
-
-// Optional: sort projects alphabetically (stable default)
-const projects = [...PROJECTS].sort((a, b) => a.title.localeCompare(b.title));
+const languages = Array.from(
+  new Set(
+    PROJECTS
+      .map(p => p.tech?.[0])
+      .filter((t): t is string => Boolean(t))
+  )
+);
 ---
 
 <BaseLayout title="Projects">
@@ -21,11 +24,13 @@ const projects = [...PROJECTS].sort((a, b) => a.title.localeCompare(b.title));
     noCode
   />
 
-  <CodeSection index={2} title="# python_based">
+  {languages.map((lang) => 
+  <CodeSection index={1} title={`${lang}_projects`}>
     <div class="project-grid">
-      {featured.map((project) => <ProjectCard project={project} />)}
+      {PROJECTS.map((project) => project.tech.includes(lang) && <ProjectCard project={project} />)}
     </div>
   </CodeSection>
+  )}
 
   <ProjectModal />
 </BaseLayout>
