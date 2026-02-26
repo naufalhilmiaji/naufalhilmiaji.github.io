@@ -4,17 +4,26 @@ const { project } = Astro.props;
 
 <button
   type="button"
-  class="project-card"
+  class="group flex flex-col text-left h-full w-full bg-bg-surface border border-border-subtle rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/5 focus:outline-none focus:ring-2 focus:ring-accent"
   data-project-card
   data-project-slug={project.slug}
 >
-  <h3>{project.title}</h3>
-
-  <div class="block"><p class="subtitle">{project.subtitle}</p></div>
-
-  <div class="project-meta">
-    {project.tech.join(" · ")}
+  <div class="flex justify-between items-start mb-3 w-full">
+    <h3 class="text-lg font-semibold text-text-main group-hover:text-accent transition-colors duration-300">
+      {project.title}
+    </h3>
+    <svg class="w-4 h-4 text-text-muted group-hover:text-accent transition-all group-hover:translate-x-1 group-hover:-translate-y-1 duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
   </div>
 
-  <span class="hint">Click to view usage</span>
+  <p class="text-text-muted text-sm leading-relaxed mb-6 flex-grow">
+    {project.subtitle}
+  </p>
+
+  <div class="w-full flex-wrap flex gap-2 pt-4 border-t border-border-subtle/50 mt-auto">
+    {project.tech.map((t: string) => (
+      <span class="text-[11px] font-mono px-2 py-1 rounded-md bg-bg-soft text-text-muted border border-border-subtle/50">
+        {t}
+      </span>
+    ))}
+  </div>
 </button>

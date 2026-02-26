@@ -1,13 +1,46 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import ProjectHeader from "../components/ProjectHeader.astro";
+import Container from "../components/Container.astro";
+import Section from "../components/Section.astro";
 
 const { title, subtitle, tech } = Astro.props;
-const meta = tech.join(" · ");
 ---
 
-<BaseLayout title={title}>
-    <ProjectHeader title={title} subtitle={subtitle} meta={meta} line="01" />
+<BaseLayout title={`${title} - Project Case Study`}>
+  <Container>
+    <Section class="pb-8 pt-12 md:pt-20 border-b border-border-subtle">
+      <a href="/projects" class="inline-flex items-center gap-2 text-sm font-mono text-text-muted hover:text-accent transition-colors mb-8">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        cd ..
+      </a>
 
-    <slot />
+      <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-text-main mb-4 leading-tight">{title}</h1>
+      
+      {subtitle && <p class="text-xl text-text-muted mb-8 max-w-[65ch] leading-relaxed">{subtitle}</p>}
+
+      <div class="flex flex-wrap gap-2 pt-6">
+        {tech.map((t: string) => (
+          <span class="text-xs font-mono px-3 py-1.5 rounded-md bg-bg-surface text-text-main border border-border-subtle shadow-sm">
+            {t}
+          </span>
+        ))}
+      </div>
+    </Section>
+
+    <Section>
+      <article class="prose prose-zinc max-w-[75ch] text-text-muted
+        prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-text-main
+        prose-a:text-accent hover:prose-a:text-accent-hover prose-a:no-underline hover:prose-a:underline prose-a:underline-offset-4 
+        prose-p:leading-relaxed prose-p:text-text-muted
+        prose-li:text-text-muted
+        prose-pre:bg-bg-base prose-pre:border prose-pre:border-border-subtle prose-pre:rounded-xl prose-pre:m-0
+        prose-img:rounded-2xl prose-img:border prose-img:border-border-subtle
+        prose-hr:border-border-subtle
+        prose-blockquote:border-l-accent prose-blockquote:bg-bg-surface prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
+        prose-strong:text-text-main prose-strong:font-medium
+      ">
+        <slot />
+      </article>
+    </Section>
+  </Container>
 </BaseLayout>

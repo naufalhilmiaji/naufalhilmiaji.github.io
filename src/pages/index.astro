@@ -1,67 +1,134 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ProjectHeader from "../components/ProjectHeader.astro";
-import CodeSection from "../components/CodeSection.astro";
+import Container from "../components/Container.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
 import { PROJECTS } from "../data/projects";
 
 const featuredProjects = PROJECTS.filter(p => p.featured);
 ---
 
-<BaseLayout title="Backend & Automation Engineer">
-
-  <ProjectHeader
-    title="Backend & Automation Engineer"
-    subtitle="Designing backend systems, automation platforms, and long-running services"
-    line="01"
-    noCode
-  />
-
-  <CodeSection index={2} title="# professional_summary">
-    <p>
-      I build backend systems and automation tools with a focus on reliability,
-      observability, and long-running behavior under real-world constraints.
-    </p>
-
-    <p>
-      My work spans Django-based backends, containerized services, and
-      multi-channel messaging automation across Linux and Windows environments.
-    </p>
-  </CodeSection>
-
-  <CodeSection index={3} title="# highlighted_projects">
-    {featuredProjects.map((project) => (
-      <div class="project">
-        <div class="project-title">
-          <a href={`/projects/${project.slug}`}>
-            {project.title}
-          </a>
-        </div>
-
-        <div class="project-meta">
-          {project.tech.join(" · ")}
-        </div>
-
-        <p>
-          {project.subtitle}
-        </p>
+<BaseLayout title="Naufal Hilmiaji - Senior Backend Engineer">
+  <Container>
+    
+    <!-- HERO SECTION -->
+    <Section class="min-h-[55vh] flex flex-col justify-center animate-fade-in-up">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-mono mb-8 border border-accent/20 w-fit backdrop-blur-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(99,102,241,0.8)]"></span>
+        Systems Online
       </div>
-    ))}
-  </CodeSection>
+      
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-text-main mb-6 leading-tight max-w-4xl">
+        Backend & <br/><span class="text-accent bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent-hover">Automation Engineer.</span>
+      </h1>
+      
+      <p class="text-lg md:text-xl text-text-muted max-w-[60ch] mb-10 leading-relaxed font-light">
+        I build highly-reliable backend systems and automation tools. 
+        Focused on <span class="text-text-main font-medium">observability</span>, 
+        <span class="text-text-main font-medium">resilient infrastructure</span>, and 
+        <span class="text-text-main font-medium">long-running behavior</span> under real-world constraints.
+      </p>
+      
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="/projects" class="px-6 py-3 rounded-lg bg-accent text-white hover:text-white font-medium hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20 hover:shadow-accent/40 hover:-translate-y-0.5 duration-300">
+          View Infrastructure
+        </a>
+        <a href="/about" class="px-6 py-3 rounded-lg bg-bg-surface border border-border-subtle text-text-main font-medium hover:bg-bg-soft hover:border-text-muted/30 transition-colors duration-300">
+          Read Engineering Log
+        </a>
+      </div>
+    </Section>
 
-  <CodeSection index={4} title="# current_focus">
-    <ul>
-      <li>Multi-channel messaging automation</li>
-      <li>Backend reliability & failure handling</li>
-      <li>Infrastructure monitoring & diagnostics</li>
-      <li>Automation-first system design</li>
-    </ul>
-  </CodeSection>
+    <!-- CORE FOCUS -->
+    <Section class="mt-8">
+      <div class="flex items-center gap-4 mb-10">
+        <h2 class="text-2xl font-semibold text-text-main tracking-tight">Core Architecture</h2>
+        <div class="h-px flex-grow bg-gradient-to-r from-border-subtle to-transparent"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 md:p-8 rounded-xl border border-border-subtle bg-bg-surface/50 hover:bg-bg-surface transition-colors duration-300">
+          <h3 class="font-mono text-accent mb-4 text-xs tracking-wider uppercase">01 / Backend Systems</h3>
+          <p class="text-text-muted text-sm leading-relaxed border-l-2 border-border-subtle pl-4 hover:border-accent transition-colors duration-300">
+            Django-based backends, distributed microservices, and high-throughput APIs designed for failure handling and graceful degradation.
+          </p>
+        </div>
+        
+        <div class="p-6 md:p-8 rounded-xl border border-border-subtle bg-bg-surface/50 hover:bg-bg-surface transition-colors duration-300">
+          <h3 class="font-mono text-accent mb-4 text-xs tracking-wider uppercase">02 / Infrastructure</h3>
+          <p class="text-text-muted text-sm leading-relaxed border-l-2 border-border-subtle pl-4 hover:border-accent transition-colors duration-300">
+            Containerization with Docker, self-hosted Linux environments, CI/CD pipelines, and deep system diagnostics for resilient deployments.
+          </p>
+        </div>
+        
+        <div class="p-6 md:p-8 rounded-xl border border-border-subtle bg-bg-surface/50 hover:bg-bg-surface transition-colors duration-300">
+          <h3 class="font-mono text-accent mb-4 text-xs tracking-wider uppercase">03 / Applied AI</h3>
+          <p class="text-text-muted text-sm leading-relaxed border-l-2 border-border-subtle pl-4 hover:border-accent transition-colors duration-300">
+            Building LLM-powered automation, custom prompt engineering, and context-aware messaging agents for automated internal workflows.
+          </p>
+        </div>
+        
+        <div class="p-6 md:p-8 rounded-xl border border-border-subtle bg-bg-surface/50 hover:bg-bg-surface transition-colors duration-300">
+          <h3 class="font-mono text-accent mb-4 text-xs tracking-wider uppercase">04 / Observability</h3>
+          <p class="text-text-muted text-sm leading-relaxed border-l-2 border-border-subtle pl-4 hover:border-accent transition-colors duration-300">
+            Implementing robust logging, Prometheus/Grafana metrics, and automated alert routing to catch system anomalies securely.
+          </p>
+        </div>
+      </div>
+    </Section>
 
-  <CodeSection index={5} title="# availability">
-    <p>
-      I'm interested in backend, automation, and systems-oriented roles where
-      reliability, clarity, and long-term maintainability matter.
-    </p>
-  </CodeSection>
+    <!-- HIGHLIGHTED PROJECTS -->
+    <Section class="mt-8">
+      <div class="flex items-center gap-4 mb-10">
+        <h2 class="text-2xl font-semibold text-text-main tracking-tight">Production Deployments</h2>
+        <div class="h-px flex-grow bg-gradient-to-r from-border-subtle to-transparent"></div>
+        <a href="/projects" class="text-sm font-mono text-accent hover:underline hover:text-accent-hover transition-colors flex items-center gap-2">
+          View_All()
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
 
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {featuredProjects.map((project) => (
+          <Card href={`/projects/${project.slug}`} class="flex flex-col h-full group">
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-xl font-semibold text-text-main group-hover:text-accent transition-colors duration-300">
+                {project.title}
+              </h3>
+              <svg class="w-5 h-5 text-text-muted group-hover:text-accent transition-all group-hover:translate-x-1 group-hover:-translate-y-1 transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </div>
+            
+            <p class="text-text-muted text-sm mb-6 flex-grow leading-relaxed">
+              {project.subtitle}
+            </p>
+            
+            <div class="flex flex-wrap gap-2 mt-auto pt-5 border-t border-border-subtle/50">
+              {project.tech.map(t => (
+                <span class="text-[11px] font-mono px-2 py-1 rounded-md bg-bg-soft text-text-muted border border-border-subtle/50">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Section>
+
+  </Container>
 </BaseLayout>
+
+<style>
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+</style>

@@ -1,149 +1,145 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import CodeSection from "../components/CodeSection.astro";
-import ProjectHeader from "../components/ProjectHeader.astro";
-
-const sections = [
-    { title: "# professional_summary" },
-    { title: "# current_focus" },
-    { title: "# experience" },
-    { title: "# design_principles" },
-    { title: "# availability" },
-];
+import Container from "../components/Container.astro";
+import Section from "../components/Section.astro";
+import Timeline from "../components/Timeline.astro";
+import { Github, Linkedin, Mail } from "@lucide/astro";
 ---
 
-<BaseLayout title="About Me">
-    <ProjectHeader
-        title="About Me"
-        subtitle="An introduction to my work, my mindset, and the values that guide both"
-        noCode
-    />
+<BaseLayout title="About Me - Naufal Hilmiaji">
+  <Container>
+    <Section class="py-8 md:py-16 border-b border-border-subtle">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-text-main mb-6">
+        <span class="text-accent font-mono text-xl mr-4">//</span>About Me
+      </h1>
+      <p class="text-lg text-text-muted max-w-[65ch] leading-relaxed">
+        An introduction to my work, my mindset, and the values that guide both.
+      </p>
+    </Section>
 
-    {
-        sections.map((section, i) => (
-            <CodeSection index={i + 1} title={section.title} summary="expand">
-                {section.title === "# professional_summary" && (
-                    <>
-                        <p>
-                            I design and build backend systems and automation
-                            tools with a strong focus on reliability, clarity,
-                            and long-term maintainability.
-                        </p>
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24 mt-12 md:mt-20">
+      <div class="space-y-16">
+        <div>
+          <h2 class="text-xl font-semibold text-text-main mb-6 flex items-center gap-3">
+            <span class="w-8 h-px bg-border-subtle"></span> System Principles
+          </h2>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3 text-text-muted">
+              <span class="text-accent mt-0.5 font-mono text-sm leading-tight">01</span>
+              <span>Explicit failure handling over silent retries</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-muted">
+               <span class="text-accent mt-0.5 font-mono text-sm leading-tight">02</span>
+              <span>Deterministic backends over opaque automation</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-muted">
+               <span class="text-accent mt-0.5 font-mono text-sm leading-tight">03</span>
+              <span>Observability before optimization</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-muted">
+               <span class="text-accent mt-0.5 font-mono text-sm leading-tight">04</span>
+              <span>Simple systems that degrade gracefully</span>
+            </li>
+          </ul>
+        </div>
 
-                        <p>
-                            My work often involves long-running services,
-                            defensive error handling, and integration across
-                            unreliable external systems.
-                        </p>
-                    </>
-                )}
+        <div>
+           <h2 class="text-xl font-semibold text-text-main mb-6 flex items-center gap-3">
+            <span class="w-8 h-px bg-border-subtle"></span> Status
+          </h2>
+          <div class="p-6 rounded-xl border border-border-subtle bg-bg-surface">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-bg-soft text-text-main text-xs font-mono mb-4 border border-border-subtle">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Open to roles
+            </div>
+            <p class="text-sm text-text-muted leading-relaxed">
+              I’m open to backend, automation, and systems-oriented roles where reliability and long-term system health are prioritized.
+            </p>
+          </div>
+        </div>
 
-                {section.title === "# current_focus" && (
-                    <ul>
-                        <li>Backend-first automation platforms</li>
-                        <li>Multi-channel messaging systems</li>
-                        <li>Infrastructure monitoring & diagnostics</li>
-                        <li>Failure-aware system design</li>
-                    </ul>
-                )}
+        <div>
+           <h2 class="text-xl font-semibold text-text-main mb-6 flex items-center gap-3">
+            <span class="w-8 h-px bg-border-subtle"></span> Connect
+          </h2>
+          <ul class="space-y-4">
+            <li>
+              <a href="https://github.com/naufalhilmiaji/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-text-muted hover:text-accent transition-colors">
+                <Github size={18} />
+                <span>Github</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com/in/naufalhilmiaji" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-text-muted hover:text-accent transition-colors">
+                <Linkedin size={18} />
+                <span>LinkedIn</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:nhilmiaji@gmail.com" class="flex items-center gap-3 text-text-muted hover:text-accent transition-colors">
+                <Mail size={18} />
+                <span>Email</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-                {section.title === "# experience" && (
-                    <>
-                        <div class="role">
-                            <h3>IT Developer</h3>
-                            <p class="meta">
-                                PT PGAS Telekomunikasi Nusantara · Aug 2022 —
-                                Present
-                            </p>
+      <div class="space-y-16">
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-6 tracking-tight">Professional Summary</h2>
+          <div class="text-text-muted leading-relaxed space-y-4">
+            <p>
+              I design and build backend systems and automation tools with a strong focus on reliability, clarity, and long-term maintainability.
+            </p>
+            <p>
+              My work often involves long-running services, defensive error handling, and integration across unreliable external systems.
+            </p>
+          </div>
+        </section>
 
-                            <details open>
-                                <summary>Show responsibilities</summary>
-                                <ul>
-                                    <li>
-                                        Designed and developed backend systems
-                                        and internal applications using
-                                        object-oriented programming and
-                                        relational databases.
-                                    </li>
-                                    <li>
-                                        Built chatbot automation for routine
-                                        reporting and data analysis, focusing on
-                                        time accuracy and system reliability.
-                                    </li>
-                                    <li>
-                                        Redesigned and extended existing
-                                        applications to meet evolving
-                                        operational and user requirements.
-                                    </li>
-                                </ul>
-                            </details>
-                        </div>
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-8 tracking-tight flex items-center gap-4">
+            Experience Log
+            <span class="h-px w-32 bg-border-subtle"></span>
+          </h2>
+          
+          <div class="ml-2">
+            <Timeline 
+              date="Aug 2022 — Present" 
+              title="IT Developer" 
+              subtitle="PT PGAS Telekomunikasi Nusantara"
+            >
+              <ul class="list-disc pl-4 space-y-2 mt-2">
+                <li>Designed and developed backend systems and internal applications using object-oriented programming and relational databases.</li>
+                <li>Built chatbot automation for routine reporting and data analysis, focusing on time accuracy and system reliability.</li>
+                <li>Redesigned and extended existing applications to meet evolving operational and user requirements.</li>
+              </ul>
+            </Timeline>
 
-                        <div class="role">
-                            <h3>Backend Developer</h3>
-                            <p class="meta">
-                                PT Stampindo Lancar Jaya · Mar 2022 — May 2022
-                            </p>
+            <Timeline 
+              date="Mar 2022 — May 2022" 
+              title="Backend Developer" 
+              subtitle="PT Stampindo Lancar Jaya"
+            >
+              <ul class="list-disc pl-4 space-y-2 mt-2">
+                <li>Contributed to backend sub-modules and API logic while optimizing performance and maintainability.</li>
+                <li>Assisted in debugging production issues and improving deployment readiness through testing.</li>
+              </ul>
+            </Timeline>
 
-                            <details open>
-                                <summary>Show responsibilities</summary>
-                                <ul>
-                                    <li>
-                                        Contributed to backend sub-modules and
-                                        API logic while optimizing performance
-                                        and maintainability.
-                                    </li>
-                                    <li>
-                                        Assisted in debugging production issues
-                                        and improving deployment readiness
-                                        through testing.
-                                    </li>
-                                </ul>
-                            </details>
-                        </div>
-
-                        <div class="role">
-                            <h3>Full Stack Web Developer (Intern)</h3>
-                            <p class="meta">
-                                PT Mitracomm Ekasarana · Jun 2020 — Aug 2020
-                            </p>
-
-                            <details open>
-                                <summary>Show responsibilities</summary>
-                                <ul>
-                                    <li>
-                                        Ensure understanding of software
-                                        requirements and ensure successful
-                                        delivery of projects
-                                    </li>
-                                    <li>
-                                        Applied software development best
-                                        practices such as data abstraction and
-                                        analysis
-                                    </li>
-                                </ul>
-                            </details>
-                        </div>
-                    </>
-                )}
-
-                {section.title === "# design_principles" && (
-                    <ul>
-                        <li>Explicit failure handling over silent retries</li>
-                        <li>Deterministic backends over opaque automation</li>
-                        <li>Observability before optimization</li>
-                        <li>Simple systems that degrade gracefully</li>
-                    </ul>
-                )}
-
-                {section.title === "# availability" && (
-                    <p>
-                        I’m open to backend, automation, and systems-oriented
-                        roles where reliability and long-term system health are
-                        prioritized.
-                    </p>
-                )}
-            </CodeSection>
-        ))
-    }
+            <Timeline 
+              date="Jun 2020 — Aug 2020" 
+              title="Full Stack Web Developer (Intern)" 
+              subtitle="PT Mitracomm Ekasarana"
+            >
+              <ul class="list-disc pl-4 space-y-2 mt-2">
+                <li>Ensure understanding of software requirements and ensure successful delivery of projects.</li>
+                <li>Applied software development best practices such as data abstraction and analysis.</li>
+              </ul>
+            </Timeline>
+          </div>
+        </section>
+      </div>
+    </div>
+  </Container>
 </BaseLayout>

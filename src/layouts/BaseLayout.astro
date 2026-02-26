@@ -1,6 +1,7 @@
 ---
 import "../assets/styles/global.css";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Container from "../components/Container.astro";
 import { Sun, Moon } from "@lucide/astro";
 
 const { title } = Astro.props;
@@ -15,7 +16,8 @@ const breadcrumbLabels = Astro.props.breadcrumbLabels || {};
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
 
     <script>
@@ -29,88 +31,75 @@ const breadcrumbLabels = Astro.props.breadcrumbLabels || {};
           } else if (storedTheme === "dark") {
             html.setAttribute("data-theme", "dark");
           } else {
-            // No stored preference → fall back to system preference
-            const prefersLight = window.matchMedia(
-              "(prefers-color-scheme: light)",
-            ).matches;
-
+            const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
             html.setAttribute("data-theme", prefersLight ? "light" : "dark");
           }
         } catch (_) {}
       })();
     </script>
   </head>
-  <body>
-    <main>
-      <nav class="navbar">
-        <div class="nav-left">
-          <span class="brand">// naufal.dev</span>
+  <body class="bg-bg-base text-text-main font-sans antialiased selection:bg-accent/30 min-h-screen flex flex-col">
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-bg-base/80 border-b border-border-subtle transition-colors duration-300">
+      <Container class="!py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3 sm:gap-6">
+          <a href="/" class="text-accent font-mono font-medium tracking-tight hover:opacity-80 transition-opacity hidden sm:block">// naufal.dev</a>
+          <a href="/" class="text-accent font-mono font-medium tracking-tight hover:opacity-80 transition-opacity sm:hidden pr-1">//</a>
 
-          <a href="/" class={`nav-link ${isActive("/") ? "active" : ""}`}
-            >home</a
-          >
-          <a
-            href="/projects"
-            class={`nav-link ${isActive("/projects") ? "active" : ""}`}
-            >projects</a
-          >
-          <a
-            href="/about"
-            class={`nav-link ${isActive("/about") ? "active" : ""}`}>about</a
-          >
+          <div class="flex items-center gap-4 sm:gap-5 md:gap-8 sm:ml-4">
+            <a href="/" class={`text-sm font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300 ${isActive("/") ? "text-text-main after:w-full" : "text-text-muted after:w-0"}`}>Home</a>
+            <a href="/projects" class={`text-sm font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300 ${isActive("/projects") ? "text-text-main after:w-full" : "text-text-muted after:w-0"}`}>Projects</a>
+            <a href="/about" class={`text-sm font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300 ${isActive("/about") ? "text-text-main after:w-full" : "text-text-muted after:w-0"}`}>About</a>
+          </div>
         </div>
 
-        <div class="nav-right">
+        <div class="flex items-center gap-4">
           <button
-            class="ui-button"
+            class="p-2 -mr-2 rounded-lg text-text-muted hover:text-accent hover:bg-accent/10 transition-colors duration-200 border border-transparent hover:border-accent/20"
             id="theme-toggle"
             aria-label="Toggle theme"
             title="Toggle theme (T)"
           >
-            <!-- Sun (shown in dark mode) -->
-            <Sun id="icon-sun" size={20} />
-
-            <!-- Moon (shown in light mode) -->
-            <Moon id="icon-moon" size={20} />
+            <Sun id="icon-sun" size={20} class="hidden dark-icon-block" />
+            <Moon id="icon-moon" size={20} class="hidden light-icon-block" />
           </button>
         </div>
-      </nav>
+      </Container>
+    </nav>
 
-      {showBreadcrumbs && <Breadcrumbs labels={breadcrumbLabels} />}
-      <aside id="toc" class="toc"></aside>
+    <main class="flex-grow">
+      {showBreadcrumbs && (
+        <Container class="!py-4 !pb-0">
+          <Breadcrumbs labels={breadcrumbLabels} />
+        </Container>
+      )}
+      
+      <aside id="toc" class="hidden xl:block fixed right-8 top-32 w-56 text-sm text-text-muted bg-bg-surface/50 backdrop-blur-md p-4 rounded-xl border border-border-subtle"></aside>
 
       <slot />
-
-      <footer style="margin-top:4rem; opacity:0.6;">
-        © {new Date().getFullYear()} Naufal Hilmiaji
-      </footer>
-
-      <div id="command-palette" class="palette hidden">
-        <div class="palette-box">
-          <input
-            id="palette-input"
-            type="text"
-            placeholder="Type a command…"
-            autocomplete="off"
-          />
-
-          <ul id="palette-list">
-            <li data-action="home">Go to Home</li>
-            <li data-action="projects">Go to Projects</li>
-            <li data-action="about">Go to About</li>
-            <li data-action="theme">Toggle Theme</li>
-          </ul>
-        </div>
-      </div>
     </main>
 
+    <Container class="!py-8 border-t border-border-subtle mt-16">
+      <footer class="text-sm text-text-muted/60 flex items-center justify-between">
+        <span>© {new Date().getFullYear()} Naufal Hilmiaji.</span>
+        <span class="font-mono text-xs flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 
+          System Online
+        </span>
+      </footer>
+    </Container>
+
+    <!-- UI Scripts -->
     <script>
       window.__PROJECTS__ = [
         { slug: "broadcastio", title: "broadcastio" },
         { slug: "directio", title: "directio" },
       ];
     </script>
-
     <script src="/scripts/ui.js" is:inline></script>
+    
+    <style is:global>
+      html[data-theme="light"] .light-icon-block { display: block; }
+      html:not([data-theme="light"]) .dark-icon-block { display: block; }
+    </style>
   </body>
 </html>

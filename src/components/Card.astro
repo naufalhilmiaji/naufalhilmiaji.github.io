@@ -1,0 +1,12 @@
+---
+const { class: className = "", href } = Astro.props;
+
+const Element = href ? "a" : "div";
+---
+
+<Element 
+  href={href}
+  class={`block bg-bg-surface border border-border-subtle rounded-xl p-6 transition-soft hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg ${className}`}
+>
+  <slot />
+</Element>

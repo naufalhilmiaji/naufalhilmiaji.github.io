@@ -1,10 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
 
 const modalEntries = await getCollection("project-modals");
 
-// Pre-render MDX content
 const renderedEntries = await Promise.all(
     modalEntries.map(async (entry) => {
         const { Content } = await entry.render();
@@ -13,46 +11,58 @@ const renderedEntries = await Promise.all(
 );
 ---
 
-<div id="project-modal" class="modal hidden" role="dialog" aria-modal="true">
+<div id="project-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true">
     <!-- backdrop -->
-    <div class="modal-backdrop" data-modal-close></div>
+    <div class="absolute inset-0 bg-bg-base/80 backdrop-blur-sm transition-opacity" data-modal-close></div>
 
     <!-- modal window -->
-    <div class="modal-content">
-        <div class="modal-scroll">
+    <div class="relative w-full max-w-2xl bg-bg-surface border border-border-subtle rounded-2xl shadow-2xl shadow-black/50 overflow-hidden flex flex-col max-h-[90vh] scale-95 opacity-0 transition-all duration-300" id="modal-content-container">
+        <div class="overflow-y-auto w-full h-full custom-scrollbar">
             {
                 renderedEntries.map(({ entry, Content }) => (
                     <div
-                        class="modal-panel"
+                        class="hidden w-full"
                         data-project={entry.slug}
-                        hidden
                     >
-                        <header class="modal-header">
-                            <h2 class="modal-title">// {entry.data.title}</h2>
+                        <header class="sticky top-0 z-10 bg-bg-surface/95 backdrop-blur-md border-b border-border-subtle px-6 py-4 flex items-center justify-between">
+                            <h2 class="text-xl font-bold tracking-tight text-text-main flex items-center gap-3">
+                              <span class="text-accent font-mono text-sm">//</span>
+                              {entry.data.title}
+                            </h2>
 
                             <button
-                                class="ui-button modal-close"
+                                class="p-2 -mr-2 text-text-muted hover:text-text-main hover:bg-bg-soft rounded-lg transition-colors flex items-center justify-center"
                                 aria-label="Close modal"
                                 title="Close (Esc)"
                                 data-modal-close
                             >
-                                ×
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                             </button>
                         </header>
 
-                        <article class="modal-body">
+                        <article class="p-6 md:p-8 prose prose-sm md:prose-base prose-zinc max-w-none text-text-muted
+                        prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-text-main
+                        prose-a:text-accent hover:prose-a:text-accent-hover prose-a:no-underline hover:prose-a:underline prose-a:underline-offset-4
+                        prose-p:text-text-muted leading-relaxed
+                        prose-li:text-text-muted
+                        prose-pre:bg-bg-base prose-pre:border prose-pre:border-border-subtle prose-pre:rounded-xl prose-pre:m-0
+                        prose-img:rounded-xl prose-img:border prose-img:border-border-subtle
+                        prose-hr:border-border-subtle
+                        prose-blockquote:border-l-accent prose-blockquote:bg-bg-surface prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
+                        prose-strong:text-text-main prose-strong:font-medium">
                             <Content />
                         </article>
 
-                        <footer class="modal-footer">
-                            <span class="modal-hint">
-                                Press <kbd>Esc</kbd> to close
+                        <footer class="sticky bottom-0 z-10 bg-bg-surface border-t border-border-subtle px-6 py-4 flex items-center justify-between">
+                            <span class="text-xs text-text-muted font-mono hidden sm:block">
+                                Press <kbd class="px-1.5 py-0.5 rounded bg-bg-soft border border-border-subtle text-text-main ml-1 font-sans">Esc</kbd> to close
                             </span>
                             <a
-                                class="ui-button"
+                                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent-hover transition-colors ml-auto shadow-md shadow-accent/20"
                                 href={`/projects/${entry.slug}`}
                             >
-                                → Read full case study
+                                Read full case study
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             </a>
                         </footer>
                     </div>
@@ -61,3 +71,16 @@ const renderedEntries = await Promise.all(
         </div>
     </div>
 </div>
+
+<style>
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--border-subtle);
+  border-radius: 10px;
+}
+</style>

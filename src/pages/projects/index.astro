@@ -1,11 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ProjectHeader from "../../components/ProjectHeader.astro";
-import CodeSection from "../../components/CodeSection.astro";
-import { PROJECTS } from "../../data/projects";
-
+import Container from "../../components/Container.astro";
+import Section from "../../components/Section.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import ProjectModal from "../../components/ProjectModal.astro";
+import { PROJECTS } from "../../data/projects";
 
 const languages = Array.from(
   new Set(
@@ -16,21 +15,36 @@ const languages = Array.from(
 );
 ---
 
-<BaseLayout title="Projects">
-  <ProjectHeader
-    title="Projects"
-    subtitle="All systems and tools developed and maintained by me"
-    line="01"
-    noCode
-  />
+<BaseLayout title="Infrastructure & Projects">
+  <Container>
+    <Section class="py-8 md:py-16 border-b border-border-subtle">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-text-main mb-6">
+        <span class="text-accent font-mono text-xl mr-4">//</span>Projects
+      </h1>
+      <p class="text-lg text-text-muted max-w-[65ch] leading-relaxed">
+        All systems, infrastructure, and automation tools developed and maintained by me.
+      </p>
+    </Section>
 
-  {languages.map((lang) => 
-  <CodeSection index={1} title={`${lang}_projects`}>
-    <div class="project-grid">
-      {PROJECTS.map((project) => project.tech.includes(lang) && <ProjectCard project={project} />)}
+    <div class="mt-12 md:mt-16 space-y-20">
+      {languages.map((lang) => (
+        <section>
+          <div class="flex items-center gap-4 mb-8">
+            <h2 class="font-bold text-text-main tracking-widest uppercase font-mono text-sm text-accent">
+              {lang}_systems
+            </h2>
+            <div class="h-px flex-grow bg-gradient-to-r from-border-subtle to-transparent"></div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PROJECTS.map((project) => (
+              project.tech.includes(lang) && <ProjectCard project={project} />
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
-  </CodeSection>
-  )}
+  </Container>
 
   <ProjectModal />
 </BaseLayout>

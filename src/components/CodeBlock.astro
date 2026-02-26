@@ -4,16 +4,22 @@ import { Copy } from "@lucide/astro/icons/index";
 const { language } = Astro.props;
 ---
 
-<div class="code-block" data-language={language}>
-    {language && <span class="code-lang">{language}</span>}
+<div class="relative group my-6 overflow-hidden rounded-xl border border-border-subtle bg-bg-base" data-language={language}>
+    {language && (
+        <div class="absolute right-4 top-0 rounded-b-md bg-bg-surface px-2.5 py-1 text-xs font-mono text-text-muted border-b border-x border-border-subtle opacity-70 group-hover:opacity-100 transition-opacity z-10">
+            {language}
+        </div>
+    )}
 
     <button
-        class="ui-button code-copy"
+        class="absolute right-4 bottom-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-bg-surface/80 backdrop-blur border border-border-subtle px-3 py-1.5 text-xs text-text-muted opacity-0 group-hover:opacity-100 transition-all hover:text-accent hover:border-accent/40 z-10 code-copy"
         aria-label="Copy code"
         title="Copy code"
     >
-        <Copy size={16} /> Copy
+        <Copy size={14} /> <span class="copy-text">Copy</span>
     </button>
 
-    <slot />
+    <div class="code-wrapper w-full overflow-x-auto [&>pre]:!m-0 [&>pre]:p-4 [&>pre]:text-sm [&>pre]:font-mono">
+        <slot />
+    </div>
 </div>

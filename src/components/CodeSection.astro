@@ -5,7 +5,6 @@ const lineNumber = index !== undefined ? String(index).padStart(2, "0") : "";
 ---
 
 <section class={lineNumber == "" ? "code-section is-modal" : "code-section"}>
-    {lineNumber &&<div class="code-gutter">{lineNumber}</div>}
 
     <div class="code-content">
         {title && <h2>{title}</h2>}

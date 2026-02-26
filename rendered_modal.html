@@ -1,0 +1,659 @@
+<div id="project-modal" class="fixed inset-0 z-[100] items-center justify-center p-4 sm:p-6" role="dialog"
+    aria-modal="true" data-astro-cid-r575xpuf=""> <!-- backdrop -->
+    <div class="absolute inset-0 bg-bg-base/80 backdrop-blur-sm transition-opacity" data-modal-close=""
+        data-astro-cid-r575xpuf=""></div> <!-- modal window -->
+    <div class="relative w-full max-w-2xl bg-bg-surface border border-border-subtle rounded-2xl shadow-2xl shadow-black/50 overflow-hidden flex flex-col max-h-[90vh] scale-95 opacity-0 transition-all duration-300"
+        id="modal-content-container" data-astro-cid-r575xpuf="" style="opacity: 1;transform: scale(1);">
+        <div class="overflow-y-auto w-full h-full custom-scrollbar" data-astro-cid-r575xpuf="">
+            <div class="hidden w-full" data-project="broadcastio" data-astro-cid-r575xpuf="">
+                <header
+                    class="sticky top-0 z-10 bg-bg-surface/95 backdrop-blur-md border-b border-border-subtle px-6 py-4 flex items-center justify-between"
+                    data-astro-cid-r575xpuf="">
+                    <h2 class="text-xl font-bold tracking-tight text-text-main flex items-center gap-3"
+                        data-astro-cid-r575xpuf="" id="section-2"> <span class="text-accent font-mono text-sm"
+                            data-astro-cid-r575xpuf="">//</span> broadcastio </h2> <button
+                        class="p-2 -mr-2 text-text-muted hover:text-text-main hover:bg-bg-soft rounded-lg transition-colors flex items-center justify-center"
+                        aria-label="Close modal" title="Close (Esc)" data-modal-close="" data-astro-cid-r575xpuf="">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            data-astro-cid-r575xpuf="">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" data-astro-cid-r575xpuf=""></path>
+                        </svg> </button>
+                </header>
+                <article class="p-6 md:p-8 prose prose-sm md:prose-base prose-invert prose-zinc max-w-none 
+                        prose-headings:font-semibold prose-headings:tracking-tight
+                        prose-a:text-accent hover:prose-a:text-accent-hover
+                        prose-p:text-text-muted leading-relaxed
+                        prose-pre:bg-[#0a0a0c] prose-pre:border prose-pre:border-border-subtle prose-pre:rounded-xl
+                        prose-code:text-accent-hover prose-code:bg-bg-soft prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
+                        prose-img:rounded-xl prose-img:border prose-img:border-border-subtle"
+                    data-astro-cid-r575xpuf="">
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-3"># problem_statement</h2>
+                            <div class="block">
+                                <p>Backend systems often need to send <strong>notifications, alerts, or reports</strong>
+                                    across multiple delivery channels that fail in different and unpredictable ways.</p>
+                                <p>Typical issues include:</p>
+                                <ul>
+                                    <li>One provider being temporarily unavailable</li>
+                                    <li>Partial delivery across channels</li>
+                                    <li>Silent failures without clear error signals</li>
+                                </ul>
+                                <p><strong>broadcastio</strong> acts as a <strong>single orchestration layer</strong>
+                                    that attempts delivery across providers with <strong>explicit failure
+                                        semantics</strong>.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-4"># it_is_and_is_not</h2>
+                            <div class="block">
+                                <h3 id="it-is">It <strong>is</strong></h3>
+                                <ul>
+                                    <li>A Python <strong>orchestration layer</strong> for outbound messages</li>
+                                    <li>A way to attempt delivery across one or more providers</li>
+                                    <li>A library with <strong>ordered fallback and retry logic</strong></li>
+                                    <li>Designed for alerts, reports, and backend-triggered notifications</li>
+                                </ul>
+                                <h3 id="it-is-not">It <strong>is not</strong></h3>
+                                <ul>
+                                    <li>A chatbot framework</li>
+                                    <li>An inbound message handler</li>
+                                    <li>A WhatsApp automation system by itself</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-5"># usage_overview</h2>
+                            <div class="block">
+                                <ol>
+                                    <li>Register one or more delivery providers</li>
+                                    <li>Define a message payload</li>
+                                    <li>Dispatch via the orchestrator</li>
+                                    <li>Inspect delivery result and failures explicitly</li>
+                                </ol>
+                                <p>The caller always receives a <strong>deterministic result object</strong> —
+                                    even when delivery fails.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-6"># minimal_example</h2>
+                            <div class="block">
+                                <div class="relative group my-6 overflow-hidden rounded-xl border border-border-subtle bg-[#0a0a0c]"
+                                    data-language="python">
+                                    <div
+                                        class="absolute right-4 top-0 rounded-b-md bg-bg-surface px-2.5 py-1 text-xs font-mono text-text-muted border-b border-x border-border-subtle opacity-70 group-hover:opacity-100 transition-opacity z-10">
+                                        python </div> <button
+                                        class="absolute right-4 bottom-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-bg-surface/80 backdrop-blur border border-border-subtle px-3 py-1.5 text-xs text-text-muted opacity-0 group-hover:opacity-100 transition-all hover:text-accent hover:border-accent/40 z-10 code-copy"
+                                        aria-label="Copy code" title="Copy code"> <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                                            class="lucide lucide-copy">
+                                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                        </svg> <span class="copy-text">Copy</span> </button>
+                                    <div
+                                        class="code-wrapper w-full overflow-x-auto [&amp;&gt;pre]:!bg-transparent [&amp;&gt;pre]:!m-0 [&amp;&gt;pre]:p-4 [&amp;&gt;pre]:text-sm [&amp;&gt;pre]:font-mono">
+                                        <pre class="astro-code astro-code-themes one-light one-dark-pro"
+                                            style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf;overflow-x:auto"
+                                            tabindex="0"
+                                            data-language="python"><code><span class="line"><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> broadcastio.core.orchestrator </span><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> Orchestrator</span></span>
+<span class="line"><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> broadcastio.providers.whatsapp </span><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> WhatsAppProvider</span></span>
+<span class="line"><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> broadcastio.core.message </span><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> Message</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">wa </span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#61AFEF"> WhatsAppProvider</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">"http://localhost:3000"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">orch </span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#61AFEF"> Orchestrator</span><span style="color:#383A42;--shiki-dark:#ABB2BF">([wa])</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">result </span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> orch.</span><span style="color:#383A42;--shiki-dark:#61AFEF">send</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#61AFEF">    Message</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
+<span class="line"><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">        recipient</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"6281234567890"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">        content</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Service is down"</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">    )</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0184BC;--shiki-dark:#56B6C2">print</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(result.success)</span></span></code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-7"># failure_handling_overview</h2>
+                            <div class="block">
+                                <p><strong>broadcastio</strong> distinguishes clearly between:</p>
+                                <ul>
+                                    <li><strong>Exceptions</strong> → configuration or programmer errors</li>
+                                    <li><strong>Delivery results</strong> → delivery was attempted but failed</li>
+                                </ul>
+                                <div class="relative group my-6 overflow-hidden rounded-xl border border-border-subtle bg-[#0a0a0c]"
+                                    data-language="python">
+                                    <div
+                                        class="absolute right-4 top-0 rounded-b-md bg-bg-surface px-2.5 py-1 text-xs font-mono text-text-muted border-b border-x border-border-subtle opacity-70 group-hover:opacity-100 transition-opacity z-10">
+                                        python </div> <button
+                                        class="absolute right-4 bottom-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-bg-surface/80 backdrop-blur border border-border-subtle px-3 py-1.5 text-xs text-text-muted opacity-0 group-hover:opacity-100 transition-all hover:text-accent hover:border-accent/40 z-10 code-copy"
+                                        aria-label="Copy code" title="Copy code"> <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                                            class="lucide lucide-copy">
+                                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                        </svg> <span class="copy-text">Copy</span> </button>
+                                    <div
+                                        class="code-wrapper w-full overflow-x-auto [&amp;&gt;pre]:!bg-transparent [&amp;&gt;pre]:!m-0 [&amp;&gt;pre]:p-4 [&amp;&gt;pre]:text-sm [&amp;&gt;pre]:font-mono">
+                                        <pre class="astro-code astro-code-themes one-light one-dark-pro"
+                                            style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf;overflow-x:auto"
+                                            tabindex="0"
+                                            data-language="python"><code><span class="line"><span style="color:#A626A4;--shiki-dark:#C678DD">if</span><span style="color:#A626A4;--shiki-dark:#C678DD"> not</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> result.success:</span></span>
+<span class="line"><span style="color:#0184BC;--shiki-dark:#56B6C2">    print</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(result.error.code, result.error.message)</span></span></code></pre>
+                                    </div>
+                                </div>
+                                <p>This makes failures <strong>observable and actionable</strong> instead of silent.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-8"># usage_scenarios</h2>
+                            <div class="block">
+                                <p><strong>broadcastio</strong> is well-suited for:</p>
+                                <ul>
+                                    <li>Infrastructure alerts</li>
+                                    <li>Scheduled backend reports</li>
+                                    <li>Operational notifications</li>
+                                    <li>Systems that require <strong>defensive delivery guarantees</strong></li>
+                                </ul>
+                                <p>It is intentionally <strong>not optimized</strong> for conversational flows.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-9"># provider_architecture</h2>
+                            <div class="block">
+                                <p>Providers (WhatsApp, Email, etc.) are implemented as <strong>adapters</strong>.</p>
+                                <p>For example:</p>
+                                <ul>
+                                    <li>WhatsApp delivery relies on an <strong>external Node.js service</strong>
+                                        based on WhatsApp Web</li>
+                                    <li>This service is <strong>not bundled</strong> with the Python package</li>
+                                </ul>
+                                <p>The provider layer is intentionally swappable.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-10"># project_status</h2>
+                            <div class="block">
+                                <ul>
+                                    <li>Status: <strong>Alpha</strong></li>
+                                    <li>APIs may evolve before 1.0.0</li>
+                                    <li>Core orchestration logic is tested and stable</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <p><em>Source code and full documentation are available in the case study.</em></p>
+                </article>
+                <footer
+                    class="sticky bottom-0 z-10 bg-bg-surface border-t border-border-subtle px-6 py-4 flex items-center justify-between"
+                    data-astro-cid-r575xpuf=""> <span class="text-xs text-text-muted font-mono hidden sm:block"
+                        data-astro-cid-r575xpuf="">
+                        Press <kbd
+                            class="px-1.5 py-0.5 rounded bg-bg-soft border border-border-subtle text-text-main ml-1 font-sans"
+                            data-astro-cid-r575xpuf="">Esc</kbd> to close
+                    </span> <a
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent-hover transition-colors ml-auto shadow-md shadow-accent/20"
+                        href="/projects/broadcastio" data-astro-cid-r575xpuf="">
+                        Read full case study
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            data-astro-cid-r575xpuf="">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" data-astro-cid-r575xpuf=""></path>
+                        </svg> </a> </footer>
+            </div>
+            <div class="hidden w-full" data-project="directio" data-astro-cid-r575xpuf="">
+                <header
+                    class="sticky top-0 z-10 bg-bg-surface/95 backdrop-blur-md border-b border-border-subtle px-6 py-4 flex items-center justify-between"
+                    data-astro-cid-r575xpuf="">
+                    <h2 class="text-xl font-bold tracking-tight text-text-main flex items-center gap-3"
+                        data-astro-cid-r575xpuf="" id="section-11"> <span class="text-accent font-mono text-sm"
+                            data-astro-cid-r575xpuf="">//</span> directio </h2> <button
+                        class="p-2 -mr-2 text-text-muted hover:text-text-main hover:bg-bg-soft rounded-lg transition-colors flex items-center justify-center"
+                        aria-label="Close modal" title="Close (Esc)" data-modal-close="" data-astro-cid-r575xpuf="">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            data-astro-cid-r575xpuf="">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" data-astro-cid-r575xpuf=""></path>
+                        </svg> </button>
+                </header>
+                <article class="p-6 md:p-8 prose prose-sm md:prose-base prose-invert prose-zinc max-w-none 
+                        prose-headings:font-semibold prose-headings:tracking-tight
+                        prose-a:text-accent hover:prose-a:text-accent-hover
+                        prose-p:text-text-muted leading-relaxed
+                        prose-pre:bg-[#0a0a0c] prose-pre:border prose-pre:border-border-subtle prose-pre:rounded-xl
+                        prose-code:text-accent-hover prose-code:bg-bg-soft prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
+                        prose-img:rounded-xl prose-img:border prose-img:border-border-subtle"
+                    data-astro-cid-r575xpuf="">
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-12"># problem_statement</h2>
+                            <div class="block">
+                                <p>Many applications need map features such as place search or directions,
+                                    but implementing this logic usually involves:</p>
+                                <ul>
+                                    <li>complex query parsing</li>
+                                    <li>multiple map APIs</li>
+                                    <li>vendor lock-in and billing requirements</li>
+                                </ul>
+                                <p><strong>directio</strong> allows applications to accept <strong>natural-language map
+                                        requests</strong>
+                                    and turn them into <strong>structured, map-ready results</strong> without relying on
+                                    paid or hosted services.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-13"># it_is_and_is_not</h2>
+                            <div class="block">
+                                <h3 id="it-is">It <strong>is</strong></h3>
+                                <ul>
+                                    <li>A backend API for natural-language place search and routing</li>
+                                    <li>A bridge between user intent and deterministic map execution</li>
+                                    <li>Designed to be consumed by web or mobile applications</li>
+                                </ul>
+                                <h3 id="it-is-not">It <strong>is not</strong></h3>
+                                <ul>
+                                    <li>A frontend map library</li>
+                                    <li>A general-purpose chatbot</li>
+                                    <li>A hosted LLM or map service</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-14"># usage_overview</h2>
+                            <div class="block">
+                                <ol>
+                                    <li>A user sends a natural-language query</li>
+                                    <li>A local LLM extracts intent and parameters</li>
+                                    <li>Backend providers execute geocoding or routing</li>
+                                    <li>The API returns clean JSON for rendering on a map</li>
+                                </ol>
+                                <p>The LLM is used <strong>only for intent extraction</strong>.
+                                    All external calls are handled by deterministic backend logic.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-15"># minimal_example</h2>
+                            <div class="block">
+                                <div class="relative group my-6 overflow-hidden rounded-xl border border-border-subtle bg-[#0a0a0c]"
+                                    data-language="bash">
+                                    <div
+                                        class="absolute right-4 top-0 rounded-b-md bg-bg-surface px-2.5 py-1 text-xs font-mono text-text-muted border-b border-x border-border-subtle opacity-70 group-hover:opacity-100 transition-opacity z-10">
+                                        bash </div> <button
+                                        class="absolute right-4 bottom-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-bg-surface/80 backdrop-blur border border-border-subtle px-3 py-1.5 text-xs text-text-muted opacity-0 group-hover:opacity-100 transition-all hover:text-accent hover:border-accent/40 z-10 code-copy"
+                                        aria-label="Copy code" title="Copy code"> <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                                            class="lucide lucide-copy">
+                                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                        </svg> <span class="copy-text">Copy</span> </button>
+                                    <div
+                                        class="code-wrapper w-full overflow-x-auto [&amp;&gt;pre]:!bg-transparent [&amp;&gt;pre]:!m-0 [&amp;&gt;pre]:p-4 [&amp;&gt;pre]:text-sm [&amp;&gt;pre]:font-mono">
+                                        <pre class="astro-code astro-code-themes one-light one-dark-pro"
+                                            style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf;overflow-x:auto"
+                                            tabindex="0"
+                                            data-language="bash"><code><span class="line"><span style="color:#4078F2;--shiki-dark:#61AFEF">curl</span><span style="color:#986801;--shiki-dark:#D19A66"> -X</span><span style="color:#50A14F;--shiki-dark:#98C379"> POST</span><span style="color:#50A14F;--shiki-dark:#98C379"> http://127.0.0.1:8000/chat</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> \</span></span>
+<span class="line"><span style="color:#986801;--shiki-dark:#D19A66">  -H</span><span style="color:#50A14F;--shiki-dark:#98C379"> "Content-Type: application/json"</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> \</span></span>
+<span class="line"><span style="color:#986801;--shiki-dark:#D19A66">  -H</span><span style="color:#50A14F;--shiki-dark:#98C379"> "X-API-Key: directio_xxxxxxxxxxxxx"</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> \</span></span>
+<span class="line"><span style="color:#986801;--shiki-dark:#D19A66">  -d</span><span style="color:#50A14F;--shiki-dark:#98C379"> '{"message":"Where can I eat ramen near Sudirman Jakarta?"}'</span></span></code></pre>
+                                    </div>
+                                </div>
+                                <p>Example response:</p>
+                                <div class="relative group my-6 overflow-hidden rounded-xl border border-border-subtle bg-[#0a0a0c]"
+                                    data-language="json">
+                                    <div
+                                        class="absolute right-4 top-0 rounded-b-md bg-bg-surface px-2.5 py-1 text-xs font-mono text-text-muted border-b border-x border-border-subtle opacity-70 group-hover:opacity-100 transition-opacity z-10">
+                                        json </div> <button
+                                        class="absolute right-4 bottom-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-bg-surface/80 backdrop-blur border border-border-subtle px-3 py-1.5 text-xs text-text-muted opacity-0 group-hover:opacity-100 transition-all hover:text-accent hover:border-accent/40 z-10 code-copy"
+                                        aria-label="Copy code" title="Copy code"> <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                                            class="lucide lucide-copy">
+                                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                        </svg> <span class="copy-text">Copy</span> </button>
+                                    <div
+                                        class="code-wrapper w-full overflow-x-auto [&amp;&gt;pre]:!bg-transparent [&amp;&gt;pre]:!m-0 [&amp;&gt;pre]:p-4 [&amp;&gt;pre]:text-sm [&amp;&gt;pre]:font-mono">
+                                        <pre class="astro-code astro-code-themes one-light one-dark-pro"
+                                            style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf;overflow-x:auto"
+                                            tabindex="0" data-language="json"><code><span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">{</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">  "intent"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: </span><span style="color:#50A14F;--shiki-dark:#98C379">"find_places"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">  "summary"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: </span><span style="color:#50A14F;--shiki-dark:#98C379">"Ramen places near Sudirman Jakarta"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">  "places"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: [</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">      "name"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: </span><span style="color:#50A14F;--shiki-dark:#98C379">"Ramen 38"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">      "lat"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: </span><span style="color:#986801;--shiki-dark:#D19A66">-6.2275566</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">      "lon"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: </span><span style="color:#986801;--shiki-dark:#D19A66">106.809542</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">  ]</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span></code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-16"># local_llm_preference</h2>
+                            <div class="block">
+                                <p><strong>directio</strong> uses a <strong>local LLM</strong> (via Ollama) to:</p>
+                                <ul>
+                                    <li>avoid sending user data to third-party APIs</li>
+                                    <li>keep behavior predictable and inspectable</li>
+                                    <li>ensure the system is fully runnable offline</li>
+                                </ul>
+                                <p>The LLM never calls map services directly.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-17"># usage_scenarios</h2>
+                            <div class="block">
+                                <p><strong>directio</strong> is suitable for:</p>
+                                <ul>
+                                    <li>map-based applications</li>
+                                    <li>location-aware dashboards</li>
+                                    <li>prototypes and demos without billing setup</li>
+                                    <li>systems that value transparency over black-box APIs</li>
+                                </ul>
+                                <p>It is not intended for high-traffic or latency-sensitive production use.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-18"># project_status</h2>
+                            <div class="block">
+                                <p><strong>directio</strong> is under active development, focusing on:</p>
+                                <ul>
+                                    <li>stable intent extraction</li>
+                                    <li>place search and routing</li>
+                                    <li>clean API contracts</li>
+                                    <li>safe usage limits</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <p><em>Read the full case study for architecture details and trade-offs.</em></p>
+                </article>
+                <footer
+                    class="sticky bottom-0 z-10 bg-bg-surface border-t border-border-subtle px-6 py-4 flex items-center justify-between"
+                    data-astro-cid-r575xpuf=""> <span class="text-xs text-text-muted font-mono hidden sm:block"
+                        data-astro-cid-r575xpuf="">
+                        Press <kbd
+                            class="px-1.5 py-0.5 rounded bg-bg-soft border border-border-subtle text-text-main ml-1 font-sans"
+                            data-astro-cid-r575xpuf="">Esc</kbd> to close
+                    </span> <a
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent-hover transition-colors ml-auto shadow-md shadow-accent/20"
+                        href="/projects/directio" data-astro-cid-r575xpuf="">
+                        Read full case study
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            data-astro-cid-r575xpuf="">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" data-astro-cid-r575xpuf=""></path>
+                        </svg> </a> </footer>
+            </div>
+            <div class="hidden w-full" data-project="dotnetwebapi" data-astro-cid-r575xpuf="">
+                <header
+                    class="sticky top-0 z-10 bg-bg-surface/95 backdrop-blur-md border-b border-border-subtle px-6 py-4 flex items-center justify-between"
+                    data-astro-cid-r575xpuf="">
+                    <h2 class="text-xl font-bold tracking-tight text-text-main flex items-center gap-3"
+                        data-astro-cid-r575xpuf="" id="section-19"> <span class="text-accent font-mono text-sm"
+                            data-astro-cid-r575xpuf="">//</span> dotnetwebapi </h2> <button
+                        class="p-2 -mr-2 text-text-muted hover:text-text-main hover:bg-bg-soft rounded-lg transition-colors flex items-center justify-center"
+                        aria-label="Close modal" title="Close (Esc)" data-modal-close="" data-astro-cid-r575xpuf="">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            data-astro-cid-r575xpuf="">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" data-astro-cid-r575xpuf=""></path>
+                        </svg> </button>
+                </header>
+                <article class="p-6 md:p-8 prose prose-sm md:prose-base prose-invert prose-zinc max-w-none 
+                        prose-headings:font-semibold prose-headings:tracking-tight
+                        prose-a:text-accent hover:prose-a:text-accent-hover
+                        prose-p:text-text-muted leading-relaxed
+                        prose-pre:bg-[#0a0a0c] prose-pre:border prose-pre:border-border-subtle prose-pre:rounded-xl
+                        prose-code:text-accent-hover prose-code:bg-bg-soft prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
+                        prose-img:rounded-xl prose-img:border prose-img:border-border-subtle"
+                    data-astro-cid-r575xpuf="">
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-20"># problem_statement</h2>
+                            <div class="block">
+                                <p>Many backend training projects stop at simple CRUD and fail to demonstrate
+                                    <strong>real architectural boundaries</strong>, <strong>authorization
+                                        rules</strong>, and
+                                    <strong>ownership-aware business logic</strong>.
+                                </p>
+                                <p>dotnetwebapi was built to simulate a realistic backend system where
+                                    authentication, authorization, and infrastructure concerns must coexist
+                                    without leaking into each other.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-21"># it_is_and_is_not</h2>
+                            <div class="block">
+                                <h3 id="it-is">It <strong>is</strong></h3>
+                                <ul>
+                                    <li>A Clean Architecture–based ASP.NET Core Web API</li>
+                                    <li>A training project for backend system design</li>
+                                    <li>An example of JWT authentication and role-based authorization</li>
+                                    <li>A simulation of an ordering backend with real constraints</li>
+                                </ul>
+                                <h3 id="it-is-not">It <strong>is not</strong></h3>
+                                <ul>
+                                    <li>A production-ready e-commerce system</li>
+                                    <li>A frontend-facing application</li>
+                                    <li>A reusable framework or library</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-22"># usage_overview</h2>
+                            <div class="block">
+                                <p>The API exposes endpoints for:</p>
+                                <ul>
+                                    <li>User registration and login (JWT)</li>
+                                    <li>Order creation with multiple items</li>
+                                    <li>Role-aware order access (ADMIN vs USER)</li>
+                                    <li>Order status updates</li>
+                                    <li>Notifications and reporting features</li>
+                                </ul>
+                                <p>Business rules are enforced in the <strong>application layer</strong>, not in
+                                    controllers.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-23"># minimal_example</h2>
+                            <div class="block">
+                                <div class="relative group my-6 overflow-hidden rounded-xl border border-border-subtle bg-[#0a0a0c]"
+                                    data-language="http">
+                                    <div
+                                        class="absolute right-4 top-0 rounded-b-md bg-bg-surface px-2.5 py-1 text-xs font-mono text-text-muted border-b border-x border-border-subtle opacity-70 group-hover:opacity-100 transition-opacity z-10">
+                                        http </div> <button
+                                        class="absolute right-4 bottom-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-bg-surface/80 backdrop-blur border border-border-subtle px-3 py-1.5 text-xs text-text-muted opacity-0 group-hover:opacity-100 transition-all hover:text-accent hover:border-accent/40 z-10 code-copy"
+                                        aria-label="Copy code" title="Copy code"> <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                                            class="lucide lucide-copy">
+                                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                        </svg> <span class="copy-text">Copy</span> </button>
+                                    <div
+                                        class="code-wrapper w-full overflow-x-auto [&amp;&gt;pre]:!bg-transparent [&amp;&gt;pre]:!m-0 [&amp;&gt;pre]:p-4 [&amp;&gt;pre]:text-sm [&amp;&gt;pre]:font-mono">
+                                        <pre class="astro-code astro-code-themes one-light one-dark-pro"
+                                            style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf;overflow-x:auto"
+                                            tabindex="0"
+                                            data-language="http"><code><span class="line"><span style="color:#A626A4;--shiki-dark:#C678DD">POST</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /api/orders</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">Authorization</span><span style="color:#A626A4;--shiki-dark:#C678DD">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> Bearer &lt;JWT_TOKEN&gt;</span></span></code></pre>
+                                    </div>
+                                </div>
+                                <div class="relative group my-6 overflow-hidden rounded-xl border border-border-subtle bg-[#0a0a0c]"
+                                    data-language="json">
+                                    <div
+                                        class="absolute right-4 top-0 rounded-b-md bg-bg-surface px-2.5 py-1 text-xs font-mono text-text-muted border-b border-x border-border-subtle opacity-70 group-hover:opacity-100 transition-opacity z-10">
+                                        json </div> <button
+                                        class="absolute right-4 bottom-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-bg-surface/80 backdrop-blur border border-border-subtle px-3 py-1.5 text-xs text-text-muted opacity-0 group-hover:opacity-100 transition-all hover:text-accent hover:border-accent/40 z-10 code-copy"
+                                        aria-label="Copy code" title="Copy code"> <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                                            class="lucide lucide-copy">
+                                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                        </svg> <span class="copy-text">Copy</span> </button>
+                                    <div
+                                        class="code-wrapper w-full overflow-x-auto [&amp;&gt;pre]:!bg-transparent [&amp;&gt;pre]:!m-0 [&amp;&gt;pre]:p-4 [&amp;&gt;pre]:text-sm [&amp;&gt;pre]:font-mono">
+                                        <pre class="astro-code astro-code-themes one-light one-dark-pro"
+                                            style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf;overflow-x:auto"
+                                            tabindex="0" data-language="json"><code><span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">{</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">  "customerId"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: </span><span style="color:#50A14F;--shiki-dark:#98C379">"&lt;GUID&gt;"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">  "items"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: [</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">      "productName"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: </span><span style="color:#50A14F;--shiki-dark:#98C379">"Mouse"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">      "quantity"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: </span><span style="color:#986801;--shiki-dark:#D19A66">2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E45649;--shiki-dark:#E06C75">      "price"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: </span><span style="color:#986801;--shiki-dark:#D19A66">150000</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">  ]</span></span>
+<span class="line"><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span></code></pre>
+                                    </div>
+                                </div>
+                                <p>Access to this endpoint depends on user role and ownership rules.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-24"># local_llm_preference</h2>
+                            <div class="block">
+                                <p>Not applicable.</p>
+                                <p>This project focuses on <strong>deterministic backend logic</strong> rather than
+                                    LLM-assisted behavior.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-25"># usage_scenarios</h2>
+                            <div class="block">
+                                <ul>
+                                    <li>Backend Clean Architecture training</li>
+                                    <li>JWT authentication &amp; authorization exercises</li>
+                                    <li>EF Core + SQL Server practice</li>
+                                    <li>Ownership-aware business rule implementation</li>
+                                    <li>SignalR and email integration examples</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="code-section is-modal"
+                        style="opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
+                        <div class="code-content">
+                            <h2 id="section-26"># project_status</h2>
+                            <div class="block">
+                                <p>dotnetwebapi is a <strong>training-focused backend project</strong> intended for
+                                    architectural learning and system design practice.</p>
+                                <p>The codebase prioritizes clarity and separation of concerns over feature
+                                    completeness.</p>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+                <footer
+                    class="sticky bottom-0 z-10 bg-bg-surface border-t border-border-subtle px-6 py-4 flex items-center justify-between"
+                    data-astro-cid-r575xpuf=""> <span class="text-xs text-text-muted font-mono hidden sm:block"
+                        data-astro-cid-r575xpuf="">
+                        Press <kbd
+                            class="px-1.5 py-0.5 rounded bg-bg-soft border border-border-subtle text-text-main ml-1 font-sans"
+                            data-astro-cid-r575xpuf="">Esc</kbd> to close
+                    </span> <a
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent-hover transition-colors ml-auto shadow-md shadow-accent/20"
+                        href="/projects/dotnetwebapi" data-astro-cid-r575xpuf="">
+                        Read full case study
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            data-astro-cid-r575xpuf="">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" data-astro-cid-r575xpuf=""></path>
+                        </svg> </a> </footer>
+            </div>
+        </div>
+    </div>
+</div>

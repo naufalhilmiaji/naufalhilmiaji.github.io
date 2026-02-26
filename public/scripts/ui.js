@@ -246,18 +246,8 @@
     const modal = document.getElementById("project-modal");
     if (!modal) return;
 
-    const panels = modal.querySelectorAll(".modal-panel");
-    const closeBtn = modal.querySelector(".modal-close");
-    const backdrop = modal.querySelector(".modal-backdrop");
-
-    const scroll = modal.querySelector(".modal-scroll");
-    const header = modal.querySelector(".modal-header");
-
-    if (scroll && header) {
-      scroll.addEventListener("scroll", () => {
-        header.classList.toggle("is-scrolled", scroll.scrollTop > 4);
-      });
-    }
+    const panels = modal.querySelectorAll("[data-project]");
+    const closeBtns = modal.querySelectorAll("[data-modal-close]");
 
     // OPEN MODAL
     document.addEventListener("click", (e) => {
@@ -268,25 +258,50 @@
       if (!slug) return;
 
       panels.forEach((panel) => {
-        panel.hidden = panel.dataset.project !== slug;
+        if (panel.dataset.project !== slug) {
+          panel.classList.add("hidden");
+        } else {
+          panel.classList.remove("hidden");
+        }
       });
 
       modal.classList.remove("hidden");
+      modal.classList.add("flex");
+
+      // Add a tiny delay to allow the display:flex to apply before triggering opacity transition
+      setTimeout(() => {
+        const container = modal.querySelector("#modal-content-container");
+        if (container) {
+          container.style.opacity = "1";
+          container.style.transform = "scale(1)";
+        }
+      }, 10);
+
       document.body.style.overflow = "hidden";
     });
 
     // CLOSE MODAL
     function closeModal() {
-      modal.classList.add("hidden");
-      document.body.style.overflow = "";
+      const container = modal.querySelector("#modal-content-container");
+      if (container) {
+        container.style.opacity = "0";
+        container.style.transform = "scale(0.95)";
+      }
+
+      setTimeout(() => {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        document.body.style.overflow = "";
+      }, 300); // Wait for transition to finish
     }
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeModal();
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+        closeModal();
+      }
     });
 
-    closeBtn?.addEventListener("click", closeModal);
-    backdrop?.addEventListener("click", closeModal);
+    closeBtns.forEach(btn => btn.addEventListener("click", closeModal));
   }
 
   /* =========================
@@ -312,7 +327,7 @@
     const headers = Array.from(document.querySelectorAll("h2"));
     if (headers.length === 0) return;
 
-    toc.innerHTML = "<strong>// contents</strong>";
+    toc.innerHTML = "<strong class=\"text-text-main font-mono text-xs uppercase tracking-widest mb-4 block\">// contents</strong>";
 
     headers.forEach((h, i) => {
       const id = `section-${i}`;
@@ -321,6 +336,7 @@
       const a = document.createElement("a");
       a.href = `#${id}`;
       a.textContent = h.textContent;
+      a.className = "block mb-2 text-text-muted hover:text-accent transition-colors truncate";
 
       toc.appendChild(a);
     });
@@ -343,29 +359,43 @@
     (entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
-          e.target.classList.add("visible");
+          e.target.style.opacity = "1";
+          e.target.style.transform = "translateY(0)";
           observer.unobserve(e.target);
         }
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.1 }
   );
 
-  document.querySelectorAll(".code-section").forEach((s) => {
+  document.querySelectorAll("section:not(.animate-fade-in-up)").forEach((s) => {
+    // initialize states for observer
+    s.style.opacity = "0";
+    s.style.transform = "translateY(15px)";
+    s.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
     observer.observe(s);
   });
 
-  document.querySelectorAll(".code-block").forEach(block => {
+  document.querySelectorAll("[data-language]").forEach(block => {
     const btn = block.querySelector(".code-copy");
-    const code = block.querySelector("pre.astro-code");
+    const code = block.querySelector("pre");
+    const copyText = btn?.querySelector(".copy-text");
 
     if (!btn || !code) return;
 
     btn.addEventListener("click", async () => {
       const text = code.innerText;
-      await navigator.clipboard.writeText(text);
-      btn.textContent = "Copied!";
-      setTimeout(() => (btn.textContent = "Copy"), 1200);
+      try {
+        await navigator.clipboard.writeText(text);
+        if (copyText) copyText.textContent = "Copied!";
+        btn.classList.add("text-emerald-400", "border-emerald-400/40");
+        setTimeout(() => {
+          if (copyText) copyText.textContent = "Copy";
+          btn.classList.remove("text-emerald-400", "border-emerald-400/40");
+        }, 1500);
+      } catch (err) {
+        console.error("Failed to copy", err);
+      }
     });
   });
 
